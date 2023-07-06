@@ -1,8 +1,8 @@
 import '../styles/layout/_product.scss'
-import image from '../styles/images/blue-ball.jpg'
+import image from '../styles/assets/blue-ball.jpg'
 
 
-function Product() {
+function Product({ product }) {
 
     return (
 
@@ -12,23 +12,15 @@ function Product() {
             </div>
             <div className="product-info">
                 <div className="product-text">
-                    <h1>Summer Ball</h1>
-                    <h2>by studio and friends</h2>
+                    <h1>{product.titulo}</h1>
+                    <h2>{product.subtitulo}</h2>
                     <p>
-                        Harvest Vases are a reinterpretation
-                        <br />
-                        of peeled fruits and vegetables as
-                        <br />
-                        functional objects. The surfaces
-                        <br />
-                        appear to be sliced and pulled aside,
-                        <br />
-                        allowing room for growth.
+                        {product.descripcion}
                     </p>
                 </div>
                 <div className="product-price-btn">
                     <p>
-                        <span>78</span>$
+                        <span>{product.precio}</span>$
                     </p>
                     <button type="button">buy now</button>
                 </div>
