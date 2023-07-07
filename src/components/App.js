@@ -1,5 +1,5 @@
 import Product from './Product';
-import '../styles/App.scss'
+import '../styles/App.scss';
 import Navbar from './Navbar';
 
 import ProductList from './ProductList';
