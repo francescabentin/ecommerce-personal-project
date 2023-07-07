@@ -1,18 +1,29 @@
 .navbar{
     width: 100%;
+    padding: 10px 5px;
     position: fixed;
     display: flex;
     justify-content: space-between;
-    background-color: aquamarine;
+    background-color: rgb(139, 160, 222);
+    align-items: center;
    
     &__list {
         display: flex;
         align-items: center;
-        
+        gap: 20px;
+    }
+
+    & h1{
+      font-size: 2rem;
+      color: azure;
+      font-weight: bold;
+
     }
 }
 
+// tener propio scss de productlist
 .productlist {
+  padding: 150px 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 50px;

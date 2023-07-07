@@ -1,13 +1,13 @@
 
 .wrapper {
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 7px 7px 7px 7px;
   box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
 }
 
 .product-img {
-  float: left;
-
 
   img {
     border-radius: 7px 0 0 7px;
@@ -15,17 +15,13 @@
 }
 
 .product-info {
-  float: left;
-  height: 420px;
-  width: 327px;
+
   border-radius: 0 7px 10px 7px;
   background-color: #ffffff;
 }
 
 .product-text {
-  height: 300px;
-  width: 327px;
-
+ 
   h1 {
     margin: 0 0 0 38px;
     font-size: 34px;
