@@ -1,5 +1,5 @@
 import productList from '../data.json'
-import '../styles/layout/_navbar.scss'
+import '../styles/layout/_productlist.scss'
 
 
 function ProductList({ Product }) {

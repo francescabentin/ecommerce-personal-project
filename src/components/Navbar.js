@@ -4,7 +4,7 @@ import cart from '../styles/assets/cart.png'
 
 function Navbar() {
     return (
-        <navbar className='navbar'>
+        <section className='navbar'>
             <div className='navbar__logo'>
                 {/*<img src={logo} style={{ width: '50px', height: '40px' }}></img>*/}
                 <h1>SUMMERBALL</h1>
@@ -14,7 +14,7 @@ function Navbar() {
                 <li><button>Sign in</button></li>
                 <li><img src={cart} style={{ width: '60px', height: '50px' }} alt='carrito de compras'></img></li>
             </ul>
-        </navbar >
+        </section >
     );
 }
 

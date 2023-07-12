@@ -1,5 +1,5 @@
 .navbar{
-    width: 100%;
+  width: 100%;
     padding: 10px 5px;
     position: fixed;
     display: flex;
@@ -19,18 +19,4 @@
       font-weight: bold;
 
     }
-}
-
-// tener propio scss de productlist
-.productlist {
-  padding: 150px 50px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 50px;
-}
-
-@media (max-width: 768px) {
-  .productlist {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
 }
