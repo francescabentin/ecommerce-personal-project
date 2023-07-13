@@ -1,22 +1,31 @@
-.navbar{
-  width: 100%;
-    padding: 10px 5px;
+.navbar {
+    width: 100%;
+    padding: 20px 0px;
     position: fixed;
     display: flex;
     justify-content: space-between;
     background-color: rgb(139, 160, 222);
     align-items: center;
-   
+    color: white;
+    font-size: 20px;
+
     &__list {
         display: flex;
         align-items: center;
         gap: 20px;
+        padding-right: 20px;
     }
 
     & h1{
-      font-size: 2rem;
+      padding-left: 15px;
+      font-size: 2.5rem;
       color: azure;
       font-weight: bold;
 
+    }
+
+    & a {
+      text-decoration: none;
+      color: white;
     }
 }

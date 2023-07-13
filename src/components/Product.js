@@ -12,9 +12,9 @@ function Product({ product }) {
             </div>
             <div className="product-info">
                 <div className="product-text">
-                    <h1>{product.titulo}</h1>
-                    <h2>{product.subtitulo}</h2>
-                    <p>
+                    <h1 className='hidden'>{product.titulo}</h1>
+                    <h2 className='hidden'>{product.subtitulo}</h2>
+                    <p className='hidden'>
                         {product.descripcion}
                     </p>
                 </div>

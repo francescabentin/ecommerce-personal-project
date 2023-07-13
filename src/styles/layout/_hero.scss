@@ -1,0 +1,13 @@
+.app__container__hero{
+height: 100vh;
+background-image:url(../assets/fondo2.jpg);
+
+}
+
+@media (min-width: 768px) {
+   .app__container__hero{
+   background-image:url(../assets/fondo.jpg) ;
+background-size:cover;
+background-position: -200px;
+   }
+}

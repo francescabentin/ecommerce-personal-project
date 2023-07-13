@@ -9,9 +9,14 @@ function ProductList({ Product }) {
     }
 
     return (
-        <section className='productlist'>
+        <>
+            <h1 className='app__container__productlist__h1'>Cada SummerBall tiene su propia historia
+            </h1>
+            <section className='app__container__productlist
+            __list'>
             {renderProducts()}
-        </section>
+            </section>
+        </>
     )
 }
 

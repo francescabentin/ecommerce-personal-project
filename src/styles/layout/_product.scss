@@ -13,9 +13,11 @@
   img {
     border-radius: 7px 0 0 7px;
     width: auto;
-    height: 200px;
+    width: 250px;
+    height: 350px;
   }
 }
+
 
 .product-info{
 padding: 5px;
@@ -24,7 +26,7 @@ padding: 5px;
 .product-text {
  
   h1 {
-    font-size: 34px;
+    font-size: 20px;
     color: #474747;
   }
 
@@ -44,6 +46,7 @@ padding: 5px;
   }
 
   p {
+    
     height: 125px;
     font-family: 'Playfair Display', serif;
     color: #8d8d8d;
@@ -95,3 +98,8 @@ justify-content: flex-end;
     }
   }
 }
+
+.hidden {
+  display: none;
+}
+
