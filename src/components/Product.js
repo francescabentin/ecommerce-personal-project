@@ -1,5 +1,5 @@
 import '../styles/layout/_product.scss'
-import image from '../styles/assets/blue-ball.jpg'
+import image from '../assets/blue-ball.jpg'
 
 
 function Product({ product }) {

@@ -1,14 +1,14 @@
 .app__container__hero{
 height: 100vh;
-background-image:url(../assets/fondo2.jpg);
+background-image:url(../../assets/fondo2.jpg);
 background-size: cover;
 background-repeat: no-repeat;
 }
 
 @media (min-width: 768px) {
    .app__container__hero{
-   background-image:url(../assets/fondo.jpg) ;
-background-size:cover;
+   background-image:url(../../assets/fondo.jpg) ;
+   background-size:cover;
 
    }
 }
