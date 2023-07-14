@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "./static/css/main.d395d473.css",
+    "main.js": "./static/js/main.6cbc4a61.js",
+    "static/media/fondo2.jpg": "./static/media/fondo2.0f31b44db0b27a28e140.jpg",
+    "static/media/fondo.jpg": "./static/media/fondo.aa14e0d2b646e6714111.jpg",
+    "static/media/blue-ball.jpg": "./static/media/blue-ball.f25bd6bb5b853123c14b.jpg",
+    "index.html": "./index.html",
+    "main.d395d473.css.map": "./static/css/main.d395d473.css.map",
+    "main.6cbc4a61.js.map": "./static/js/main.6cbc4a61.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d395d473.css",
+    "static/js/main.6cbc4a61.js"
+  ]
+}
