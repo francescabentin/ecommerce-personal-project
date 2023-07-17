@@ -1,26 +1,36 @@
 import productList from "../data.json";
 import "../styles/layout/_productlist.scss";
 
-function ProductList({ Product, allProducts, setAllProducts }) {
+function ProductList({ Product, allProducts, setAllProducts, countProducts, setCountProducts, setTotal, total }) {
 
     const onAddProduct = (product) => {
-        setAllProducts([...allProducts, product]);
-        /*const existingProduct = allProducts.find((item) => item.id === product.id);
+
+        const existingProduct = allProducts.find((item) => item.id === product.id);
 
     if (existingProduct) {
         // Si el producto ya existe en el carrito, actualiza su cantidad
         const products = allProducts.map((item) =>
             item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
+        setCountProducts(countProducts + 1);
         setAllProducts(products);
+
     } else {
         // Si el producto no existe en el carrito, agrégalo con cantidad 1
         setAllProducts([...allProducts, { ...product, quantity: 1 }]);
-    }
-};*/
-    }
+        setCountProducts(countProducts + 1);
 
-    console.log(allProducts);
+    }
+        const newTotal = allProducts.reduce((acc, item) => {
+            return acc + item.precio * item.quantity;
+        }, 0);
+
+        setTotal(newTotal);
+
+    };
+
+
+
 
     const renderProducts = () => {
         return productList.map((product, index) => (

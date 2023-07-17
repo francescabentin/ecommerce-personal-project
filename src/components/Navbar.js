@@ -4,7 +4,7 @@ import cart from "../assets/cart.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function Navbar({ allProducts }) {
+function Navbar({ allProducts, total, countProducts }) {
     const [isMenuVisible, setMenuVisible] = useState(false);
     const [active, setActive] = useState(false);
 
@@ -19,6 +19,7 @@ function Navbar({ allProducts }) {
     const handleClickActive = () => {
         setActive(!active);
     }
+
 
     return (
         <section className="navbar">
@@ -49,7 +50,7 @@ function Navbar({ allProducts }) {
                             src={cart}
                             style={{ width: "60px", height: "50px" }}
                             alt="carrito de compras"></img>
-                        <span className="navbar__list__cart__span">1</span>
+                        <span className="navbar__list__cart__span">{countProducts}</span>
                     </div>
                 </li>
             </ul>
@@ -90,8 +91,9 @@ function Navbar({ allProducts }) {
                         </div>
                         <div className="cart-total ">
                             <h3>Total:</h3>
-                            <span className="total-pagar">200</span>
+                            <span className="total-pagar">{total}</span>
                         </div>
+                        <button className="btn-clearall">Vaciar Carrito</button>
                     </>
                 ) : (
                     <p className="cart-empty">El carrito está vacío</p>
