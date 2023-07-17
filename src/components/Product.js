@@ -2,17 +2,22 @@ import '../styles/layout/_product.scss'
 import image from '../assets/blue-ball.jpg'
 
 
-function Product({ product }) {
+
+function Product({ product, onAddProduct }) {
+
+    const handleClickAdd = () => {
+        onAddProduct(product);
+    }
 
     return (
 
-        <div className="wrapper">
+        <div key={product.id} className="wrapper">
             <div className="product-img">
                 <img src={image} height="420" width="327" alt=' product' />
             </div>
             <div className="product-info">
                 <div className="product-text">
-                    <h1 className='hidden'>{product.titulo}</h1>
+                    <h1 >{product.titulo}</h1>
                     <h2 className='hidden'>{product.subtitulo}</h2>
                     <p className='hidden'>
                         {product.descripcion}
@@ -22,9 +27,10 @@ function Product({ product }) {
                     <p>
                         <span>{product.precio}</span>$
                     </p>
-                    <button type="button">buy now</button>
+                    <button onClick={handleClickAdd} type="button">buy now</button>
                 </div>
             </div>
+
         </div>
 
     );

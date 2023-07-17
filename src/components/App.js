@@ -6,25 +6,46 @@ import Login from "./Login";
 import ProductList from "./ProductList";
 import Signup from "./Signup";
 import NotFound from './NotFound';
-import Mycart from './MyCart'
 import Hero from "./Hero";
+import { useState } from "react";
 
 function App() {
+
+
+  const [allProducts, setAllProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [countProducts, setCountProducts] = useState(0);
+
+
   return (
     <div className="app">
-      <Navbar />
+      <Navbar
+        allProducts={allProducts}
+        setAllProducts={setAllProducts}
+        total={total}
+        setTotal={setTotal}
+        countProducts={countProducts}
+        setCountProducts={setCountProducts}
+      />
       <div className="app__container">
         <Routes>
           <Route exact path="/"
             element={
               <>
                 <Hero />
-                <ProductList Product={Product} />
+                <ProductList
+                  allProducts={allProducts}
+                  setAllProducts={setAllProducts}
+                  total={total}
+                  setTotal={setTotal}
+                  countProducts={countProducts}
+                  setCountProducts={setCountProducts}
+                  Product={Product} />
+
               </>}
           />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="my-cart" element={<Mycart />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

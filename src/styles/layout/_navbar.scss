@@ -9,6 +9,7 @@
   color: white;
   font-size: 20px;
   position: relative;
+  
 
 
   &__list {
@@ -17,6 +18,7 @@
     align-items: center;
     gap: 20px;
     padding-right: 20px;
+    padding-top: 50px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -29,11 +31,23 @@
     background-color: rgb(218, 177, 177);
     color: black;
 
+    &__cart {
+    position: relative;
+
+    &__span{
+      position: absolute;
+      top: 55%;
+      right: 0;
+    }
+
+  }
+
     @media (min-width: 768px) {
     display:flex;
     flex-direction: row;
     align-items: initial;
     padding-right: 20px;
+    padding-top: initial;
     color: white;
     align-items: center;
     font-size: 25px;
@@ -50,6 +64,7 @@
       }
   }
 
+
   & h1 {
     padding-left: 15px;
     font-size: 2.5rem;
@@ -60,12 +75,20 @@
   & a {
     text-decoration: none;
     color: black;
+
+   @media (min-width: 768px) {
+    color: white;
   }
+
+  }
+
+  
 }
 
 
 .menuhidden {
   display: flex;
+  padding-right: 20px;
 
    @media (min-width: 768px) {
     display: none;
@@ -78,3 +101,80 @@
     transform: translateY(0);
 }
 
+
+.container-cart-products{
+    position: absolute;
+    top: 50px;
+    right: 0;
+
+    background-color: #fff;
+    width: 400px;
+    z-index: 1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
+    border-radius: 10px;
+    color: black;
+    
+}
+
+.cart-product{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+
+}
+
+.info-cart-product{
+    display: flex;
+    justify-content: space-between;
+    flex: 0.8;
+}
+
+.titulo-producto-carrito{
+    font-size: 20px;
+}
+
+.precio-producto-carrito{
+    font-weight: 700;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.cantidad-producto-carrito{
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.icon-close{
+    width: 25px;
+    height: 25px;
+}
+
+.icon-close:hover{
+    stroke: red;
+    cursor: pointer;
+}
+
+.cart-total{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    gap: 20px;
+}
+
+.cart-total h3{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.total-pagar{
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.hidden-cart{
+    display: none;
+}

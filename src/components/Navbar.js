@@ -1,12 +1,12 @@
-import '../styles/layout/_navbar.scss'
+import "../styles/layout/_navbar.scss";
 //import logo from '../styles/assets/menu.png'
-import cart from '../assets/cart.png'
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import cart from "../assets/cart.png";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function Navbar() {
-
+function Navbar({ allProducts }) {
     const [isMenuVisible, setMenuVisible] = useState(false);
+    const [active, setActive] = useState(false);
 
     const handleClickEvent = () => {
         setMenuVisible(!isMenuVisible);
@@ -14,22 +14,94 @@ function Navbar() {
 
     const handleClickItem = () => {
         setMenuVisible(false);
-    } 
+    };
+
+    const handleClickActive = () => {
+        setActive(!active);
+    }
 
     return (
-        <section className='navbar'>
-            <div className='navbar__logo' >
+        <section className="navbar">
+            <div className="navbar__logo">
                 {/*<img src={logo} style={{ width: '50px', height: '40px' }}></img>*/}
-                <Link to="/"> <h1>SUMMERBALL</h1> </Link>
+                <Link to="/">
+                    {" "}
+                    <h1>SUMMERBALL</h1>{" "}
+                </Link>
             </div>
-            <ul className={`navbar__list ${isMenuVisible ? 'show' : ''}`}>
-                <li><p>Hello Guest</p></li>
-                <li><Link onClick={handleClickItem} to="login">login</Link></li>
-                <li><Link onClick={handleClickItem} to="signup">signup</Link></li>
-                <li><Link onClick={handleClickItem} to="my-cart"><img src={cart} style={{ width: '60px', height: '50px' }} alt='carrito de compras'></img></Link></li>
+            <ul className={`navbar__list ${isMenuVisible ? "show" : ""}`}>
+                <li>
+                    <p>Hello Guest</p>
+                </li>
+                <li>
+                    <Link onClick={handleClickItem} to="login">
+                        login
+                    </Link>
+                </li>
+                <li>
+                    <Link onClick={handleClickItem} to="signup">
+                        signup
+                    </Link>
+                </li>
+                <li>
+                    <div onClick={handleClickActive} className="navbar__list__cart">
+                        <img
+                            src={cart}
+                            style={{ width: "60px", height: "50px" }}
+                            alt="carrito de compras"></img>
+                        <span className="navbar__list__cart__span">1</span>
+                    </div>
+                </li>
             </ul>
-            <span onClick={handleClickEvent} className='menuhidden'>menu</span>
-        </section >
+            <span onClick={handleClickEvent} className="menuhidden">
+                menu
+            </span>
+
+            <div className={`container-cart-products ${active ? "" : "hidden-cart"}`}>
+
+                {allProducts.length ? (
+                    <>
+                        <div className="row-product">
+                            {allProducts.map(product =>
+                            (
+                                <div className="cart-product" key={product.id}>
+                                    <div className="info-cart-product">
+                                        <span className="cantidad-producto-carrito">{product.quantity}</span>
+                                        <p className="titulo-producto-carrito">{product.titulo}</p>
+                                        <span className="precio-producto-carrito">$ {product.precio}</span>
+                                    </div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        stroke="currentColor"
+                                        className="icon-close"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    </svg>
+                                </div>
+                            ))}
+
+                        </div>
+                        <div className="cart-total ">
+                            <h3>Total:</h3>
+                            <span className="total-pagar">200</span>
+                        </div>
+                    </>
+                ) : (
+                    <p className="cart-empty">El carrito está vacío</p>
+                )
+                }
+
+
+            </div>
+
+        </section>
     );
 }
 
