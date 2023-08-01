@@ -29,7 +29,7 @@ function App() {
       />
       <div className="app__container">
         <Routes>
-          <Route exact path="/"
+          <Route path="/"
             element={
               <>
                 <Hero />
@@ -46,6 +46,7 @@ function App() {
           />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </div>
