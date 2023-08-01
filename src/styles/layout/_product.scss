@@ -14,12 +14,16 @@
 }
 
 .product-img {
-
+     width: 250px;
+    height: 200px;
+    overflow: hidden;
   img {
     border-radius: 7px 0 0 7px;
     width: auto;
     width: 250px;
     height: 350px;
+    margin-top: -110px;
+   
   }
 }
 

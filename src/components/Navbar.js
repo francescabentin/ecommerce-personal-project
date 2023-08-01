@@ -4,7 +4,7 @@ import cart from "../assets/cart.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function Navbar({ allProducts, total, countProducts }) {
+function Navbar({ allProducts, total, countProducts, setAllProducts, setCountProducts, setTotal }) {
     const [isMenuVisible, setMenuVisible] = useState(false);
     const [active, setActive] = useState(false);
 
@@ -18,6 +18,21 @@ function Navbar({ allProducts, total, countProducts }) {
 
     const handleClickActive = () => {
         setActive(!active);
+    }
+
+    const handleDeleteAll = () => {
+        setAllProducts([]);
+        setTotal(0);
+        setCountProducts(0);
+    }
+
+    const OnDeleteProduct = (product) => {
+        const results = allProducts.filter(item => item.id !== product.id);
+
+
+        setTotal(total - product.precio * product.quantity)
+        setCountProducts(countProducts - product.quantity);
+        setAllProducts(results);
     }
 
 
@@ -78,6 +93,7 @@ function Navbar({ allProducts, total, countProducts }) {
                                         strokeWidth={1.5}
                                         stroke="currentColor"
                                         className="icon-close"
+                                        onClick={() => OnDeleteProduct(product)}
                                     >
                                         <path
                                             strokeLinecap="round"
@@ -93,7 +109,7 @@ function Navbar({ allProducts, total, countProducts }) {
                             <h3>Total:</h3>
                             <span className="total-pagar">{total}</span>
                         </div>
-                        <button className="btn-clearall">Vaciar Carrito</button>
+                        <button onClick={handleDeleteAll} className="btn-clearall">Vaciar Carrito</button>
                     </>
                 ) : (
                     <p className="cart-empty">El carrito está vacío</p>
