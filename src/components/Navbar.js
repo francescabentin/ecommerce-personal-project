@@ -1,6 +1,6 @@
 import "../styles/layout/_navbar.scss";
 //import logo from '../styles/assets/menu.png'
-import cart from "../assets/cart.png";
+import cart from "../images/cart.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 

@@ -1,7 +1,6 @@
-import productList from "../data.json";
 import "../styles/layout/_productlist.scss";
 
-function ProductList({ Product, allProducts, setAllProducts, countProducts, setCountProducts, setTotal, total }) {
+function ProductList({ Product, allProducts, setAllProducts, countProducts, setCountProducts, setTotal, productList }) {
 
     const onAddProduct = (product) => {
 
@@ -28,8 +27,6 @@ function ProductList({ Product, allProducts, setAllProducts, countProducts, setC
         setTotal(newTotal);
 
     };
-
-
 
 
     const renderProducts = () => {

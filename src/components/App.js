@@ -7,15 +7,20 @@ import ProductList from "./ProductList";
 import Signup from "./Signup";
 import NotFound from './NotFound';
 import Hero from "./Hero";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import data from "../data.json";
 
 function App() {
 
-
+  const [productList, setProductList] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [countProducts, setCountProducts] = useState(0);
 
+  //getDataApi
+  useEffect(() => {
+    setProductList(data);
+  }, []);
 
   return (
     <div className="app">
@@ -40,10 +45,11 @@ function App() {
                   setTotal={setTotal}
                   countProducts={countProducts}
                   setCountProducts={setCountProducts}
-                  Product={Product} />
+                  Product={Product}
+                  productList={productList} />
 
               </>}
-          />
+          ></Route>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="*" element={<NotFound />} />
