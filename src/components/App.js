@@ -8,7 +8,7 @@ import Signup from "./Signup";
 import NotFound from './NotFound';
 import Hero from "./Hero";
 import { useState, useEffect } from "react";
-import data from "../data.json";
+import getDataApi from "../services/apiFetch";
 
 function App() {
 
@@ -19,8 +19,12 @@ function App() {
 
   //getDataApi
   useEffect(() => {
-    setProductList(data);
-  }, []);
+    getDataApi().then((data) => {
+      setProductList(data);
+
+    });
+  }, [productList]);
+
 
   return (
     <div className="app">

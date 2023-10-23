@@ -1,18 +1,18 @@
-import avatar from '../images/avatar.jpg';
+import imagen from "../images/imagen1.jpg";
 
-const getDataApi = (house) => {
-    return fetch(`https://hp-api.onrender.com/api/characters/house/${house}`)
+const getDataApi = () => {
+    return fetch('https://fakestoreapi.com/products')
         .then((response) => response.json())
         .then((data) => {
             const cleanData =
                 data.map((eachObject) => {
                     return {
-                        name: eachObject.name,
-                        house: eachObject.house,
-                        species: eachObject.species,
-                        image: eachObject.image || avatar,
+                        titulo: eachObject.title,
+                        precio: eachObject.price,
+                        descripcion: eachObject.description,
+                        imagen: eachObject.image || imagen,
                         id: eachObject.id,
-                        gender: eachObject.gender
+                        category: eachObject.category
                     }
                 })  
             return cleanData;
