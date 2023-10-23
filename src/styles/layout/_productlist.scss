@@ -1,16 +1,16 @@
 
 .app__container__productlist {
-  
+  padding-top: 200px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 50px;
  height: 100vh;
- margin: 0 20px;
+ margin: 20px 20px;
 }
 
 
 .app__container__productlist__h1 {
-  padding-top: 100px;
+  padding-top: 200px;
   padding-bottom: 50px;
     color: black;
     font-size: 40px;

@@ -1,5 +1,5 @@
 import '../styles/layout/_product.scss'
-import image from '../images/blue-ball.jpg'
+import imagen from "../images/imagen1.jpg"
 
 
 
@@ -13,7 +13,7 @@ function Product({ product, onAddProduct }) {
 
         <div key={product.id} className="wrapper">
             <div className="product-img">
-                <img src={image} height="420" width="327" alt=' product' />
+                <img src={imagen} height="420" width="327" alt=' product' />
             </div>
             <div className="product-info">
                 <div className="product-text">

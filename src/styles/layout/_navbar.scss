@@ -4,12 +4,15 @@
   position: fixed;
   display: flex;
   justify-content: space-between;
-  background-color: rgb(139, 160, 222);
+  background-color: rgba(190, 190, 164, 100);
   align-items: center;
-  color: white;
+  color: black;
   font-size: 20px;
-  position: relative;
-  
+   z-index: 10000;
+  height: 80px;
+    @media (min-width: 768px) {
+    height: 50px;
+  }
 
 
   &__list {
@@ -28,7 +31,7 @@
     transition: opacity 0.9s ease, transform 0.9s ease;
     z-index: 999;
     height: 100vh;
-    background-color: rgb(218, 177, 177);
+    background-color: rgba(190, 190, 164, 0.900);
     color: black;
 
     &__cart {
@@ -43,12 +46,13 @@
   }
 
     @media (min-width: 768px) {
+
     display:flex;
     flex-direction: row;
     align-items: initial;
     padding-right: 20px;
     padding-top: initial;
-    color: white;
+    color: black;
     align-items: center;
     font-size: 25px;
     position: initial;
@@ -61,6 +65,7 @@
     z-index: initial;
     height: initial;
     background-color: initial;
+    font-size: 2rem;
       }
   }
 
@@ -68,7 +73,7 @@
   & h1 {
     padding-left: 15px;
     font-size: 2.5rem;
-    color: azure;
+    color: black;
     font-weight: bold;
   }
 
@@ -77,7 +82,7 @@
     color: black;
 
    @media (min-width: 768px) {
-    color: white;
+    color: black;
   }
 
   }
@@ -200,3 +205,8 @@
   transform: scale(1.03);
   border-radius: 0;
 }
+
+.sectionNavbar{
+  position: relative;
+}
+

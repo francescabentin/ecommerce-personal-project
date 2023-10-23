@@ -37,12 +37,13 @@ function Navbar({ allProducts, total, countProducts, setAllProducts, setCountPro
 
 
     return (
-        <section className="navbar">
+        <section className="sectionNavbar">
+            <div className="navbar">
             <div className="navbar__logo">
                 {/*<img src={logo} style={{ width: '50px', height: '40px' }}></img>*/}
                 <Link to="/">
                     {" "}
-                    <h1>SUMMERBALL</h1>{" "}
+                        <h1>RedVelvetBoutique</h1>{" "}
                 </Link>
             </div>
             <ul className={`navbar__list ${isMenuVisible ? "show" : ""}`}>
@@ -118,7 +119,7 @@ function Navbar({ allProducts, total, countProducts, setAllProducts, setCountPro
 
 
             </div>
-
+            </div>
         </section>
     );
 }

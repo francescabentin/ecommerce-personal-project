@@ -4,7 +4,7 @@ function Hero() {
 
     return (
         <div className='app__container__hero'>
-            <p></p>
+
         </div>
     )
 }
