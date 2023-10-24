@@ -1,4 +1,8 @@
 import "../styles/layout/_productlist.scss";
+import { Input } from 'antd';
+
+
+
 
 function ProductList({ Product, allProducts, setAllProducts, countProducts, setCountProducts, setTotal, productList }) {
 
@@ -40,6 +44,8 @@ function ProductList({ Product, allProducts, setAllProducts, countProducts, setC
             <h1 className="app__container__productlist__h1">
                 Lo mas vendido , elije la categoria que desees
             </h1>
+            <Input.Search placeholder='Buscar...' />
+
             <section
                 className="app__container__productlist
                 __list">

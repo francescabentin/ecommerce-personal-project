@@ -17,12 +17,13 @@ function App() {
   const [total, setTotal] = useState(0);
   const [countProducts, setCountProducts] = useState(0);
 
-  //getDataApi
   useEffect(() => {
-    getDataApi().then((data) => {
-      setProductList(data);
 
-    });
+    if (productList.length === 0) {
+      getDataApi().then((data) => {
+        setProductList(data);
+      });
+    }
   }, [productList]);
 
 

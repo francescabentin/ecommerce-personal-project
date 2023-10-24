@@ -1,4 +1,4 @@
-import imagen from "../images/imagen1.jpg";
+
 
 const getDataApi = () => {
     return fetch('https://fakestoreapi.com/products')
@@ -10,7 +10,7 @@ const getDataApi = () => {
                         titulo: eachObject.title,
                         precio: eachObject.price,
                         descripcion: eachObject.description,
-                        imagen: eachObject.image || imagen,
+                        imagen: eachObject.image,
                         id: eachObject.id,
                         category: eachObject.category
                     }
