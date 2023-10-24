@@ -28,7 +28,9 @@ function App() {
 
 
   return (
+
     <div className="app">
+
       <Navbar
         allProducts={allProducts}
         setAllProducts={setAllProducts}
@@ -60,7 +62,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+
     </div>
+
   );
 }
 
