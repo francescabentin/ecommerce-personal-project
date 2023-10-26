@@ -8,21 +8,25 @@ import NotFound from './NotFound';
 import Hero from "./Hero";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchProducts, setEntities } from '../store/slices/productsSlice';
+import { fetchProducts, setList } from '../store/slices/productsSlice';
+import ProductDetail from "./ProductDetail";
+
 
 
 function App() {
 
 
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.productsSlice.entities);
+  const { productList } = useSelector((state) => state.productsSlice);
 
 
   useEffect(() => {
+
     if (productList.length === 0) {
       dispatch(fetchProducts()).then((resultAction) => {
         if (fetchProducts.fulfilled.match(resultAction)) {
-          dispatch(setEntities(resultAction.payload));
+          dispatch(setList(resultAction.payload));
+
         }
       });
     }
@@ -49,6 +53,7 @@ function App() {
           ></Route>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="/product-detail/:productId" element={<ProductDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

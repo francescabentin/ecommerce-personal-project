@@ -4,13 +4,14 @@ import { Input } from 'antd';
 import imagen from "../images/imagen1.jpg";
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from "../store/slices/CartSlice";
+import { Link } from 'react-router-dom';
 
 
 
 
 function ProductList() {
 
-    const productList = useSelector((state) => state.productsSlice.entities);
+    const { productList } = useSelector((state) => state.productsSlice);
 
 
     const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function ProductList() {
                         </p>
                         <button onClick={() => handleAddItem(product)} type="button">buy now</button>
                     </div>
+                    <Link to={`/product-detail/${product.id}`}>Ver detalles</Link>
                 </div>
 
             </div>

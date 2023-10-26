@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const NavbarSlice = createSlice({
+export const NavbarSlice = createSlice({
     name: 'NavbarSlice',
     initialState: {
         isMenuVisible: false,
@@ -19,6 +19,7 @@ const NavbarSlice = createSlice({
     },
 });
 
+
 export const { toggleMenu, CloseMenu, toggleActive } = NavbarSlice.actions;
 
-export default NavbarSlice.reducer;
+

@@ -13,7 +13,7 @@ function Navbar() {
     const isMenuVisible = useSelector((state) => state.NavbarSlice.isMenuVisible);
     const isCartActive = useSelector((state) => state.NavbarSlice.isCartActive);
     const allProducts = useSelector((state) => state.CartSlice.allProducts);
-    console.log(allProducts)
+
     const total = useSelector((state) => state.CartSlice.total)
 
     const dispatch = useDispatch();
@@ -37,6 +37,8 @@ function Navbar() {
     const handleClearAll = () => {
         dispatch(clearCart());
     }
+
+    const totalProducts = allProducts.reduce((total, product) => total + product.quantity, 0);
 
     return (
         <section className="sectionNavbar">
@@ -116,7 +118,7 @@ function Navbar() {
                         </div>
 
                         <div className="cart-total ">
-                                    <h3>Total: </h3>
+                                    <h3>{totalProducts} </h3>
                                     <span className="total-pagar">{total}</span>
                         </div>
                                 <button onClick={() => handleClearAll()}
