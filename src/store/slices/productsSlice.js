@@ -1,17 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+const initialState = {
+    productList: [],
+    product: {},
+}
+
 export const productsSlice = createSlice({
+
     name: 'productsSlice',
-    initialState: {
-        productList: [],
-
-
-    },
-
+    initialState,
     reducers: {
         setList: (state, action) => {
             state.productList = action.payload;
+        },
 
+        findProduct: (state, action) => {
+            const { productIdNumber } = action.payload;
+            const foundProduct = state.productList.find((item) => productIdNumber === item.id);
+            state.product = foundProduct || null; 
         },
     }
 
@@ -30,6 +36,8 @@ export const fetchProducts = createAsyncThunk('products/fetch', async () => {
 
 
 
-export const { setList, setSingleProduct } = productsSlice.actions
+export const { setList, findProduct } = productsSlice.actions
+
+export default productsSlice.reducer;
 
 

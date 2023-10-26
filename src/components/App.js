@@ -8,7 +8,7 @@ import NotFound from './NotFound';
 import Hero from "./Hero";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchProducts, setList } from '../store/slices/productsSlice';
+import { fetchProducts, setList } from '../store/slices/ProductsSlice';
 import ProductDetail from "./ProductDetail";
 
 
@@ -17,17 +17,15 @@ function App() {
 
 
   const dispatch = useDispatch();
-  const { productList } = useSelector((state) => state.productsSlice);
+  const productList = useSelector((state) => state.productsSlice.productList);
 
 
   useEffect(() => {
 
     if (productList.length === 0) {
       dispatch(fetchProducts()).then((resultAction) => {
-        if (fetchProducts.fulfilled.match(resultAction)) {
           dispatch(setList(resultAction.payload));
 
-        }
       });
     }
   }, [productList, dispatch]);

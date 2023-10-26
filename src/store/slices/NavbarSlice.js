@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+    isMenuVisible: false,
+    isCartActive: false,
+
+}
+
 export const NavbarSlice = createSlice({
     name: 'NavbarSlice',
-    initialState: {
-        isMenuVisible: false,
-        isCartActive: false,
-    },
+    initialState,
     reducers: {
         toggleMenu: (state) => {
             state.isMenuVisible = !state.isMenuVisible;
@@ -21,5 +24,7 @@ export const NavbarSlice = createSlice({
 
 
 export const { toggleMenu, CloseMenu, toggleActive } = NavbarSlice.actions;
+
+export default NavbarSlice.reducer
 
 

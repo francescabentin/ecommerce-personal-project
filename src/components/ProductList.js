@@ -44,7 +44,7 @@ function ProductList() {
                         </p>
                         <button onClick={() => handleAddItem(product)} type="button">buy now</button>
                     </div>
-                    <Link to={`/product-detail/${product.id}`}>Ver detalles</Link>
+                    <Link to={`/product-detail/${product.id}`}>details</Link>
                 </div>
 
             </div>
