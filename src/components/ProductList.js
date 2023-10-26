@@ -1,43 +1,53 @@
 import "../styles/layout/_productlist.scss";
+import '../styles/layout/_product.scss'
 import { Input } from 'antd';
+import imagen from "../images/imagen1.jpg";
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from "../store/slices/CartSlice";
 
 
 
 
-function ProductList({ Product, allProducts, setAllProducts, countProducts, setCountProducts, setTotal, productList }) {
+function ProductList() {
 
-    const onAddProduct = (product) => {
+    const productList = useSelector((state) => state.productsSlice.entities);
 
-        const existingProduct = allProducts.find((item) => item.id === product.id);
 
-    if (existingProduct) {
+    const dispatch = useDispatch();
 
-        const products = allProducts.map((item) =>
-            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-        setCountProducts(countProducts + 1);
-        setAllProducts(products);
-
-    } else {
-
-        setAllProducts([...allProducts, { ...product, quantity: 1 }]);
-        setCountProducts(countProducts + 1);
+    const handleAddItem = (product) => {
+        dispatch(addItem(product))
 
     }
-        const newTotal = allProducts.reduce((acc, item) => {
-            return acc + item.precio * item.quantity;
-        }, 0);
 
-        setTotal(newTotal);
-
-    };
+    console.log(productList)
 
 
     const renderProducts = () => {
-        return productList.map((product, index) => (
-            <Product key={index} product={product} onAddProduct={onAddProduct} />
+        return productList.map((product) => (
+            <div key={product.id} className="wrapper">
+                <div className="product-img">
+                    <img src={product.image || imagen} alt='product' />
+                </div>
+                <div className="product-info">
+                    <div className="product-text">
+                        <h1 >{product.titulo}</h1>
+                        <h2 >{product.category}</h2>
+                        <p >
+                            {product.description}
+                        </p>
+                    </div>
+                    <div className="product-price-btn">
+                        <p>
+                            <span>{product.price}</span>$
+                        </p>
+                        <button onClick={() => handleAddItem(product)} type="button">buy now</button>
+                    </div>
+                </div>
+
+            </div>
         ));
-    };
+    };     
 
     return (
         <>
@@ -49,10 +59,13 @@ function ProductList({ Product, allProducts, setAllProducts, countProducts, setC
             <section
                 className="app__container__productlist
                 __list">
-                {renderProducts()}
+                {
+                    renderProducts()}          
             </section>
         </>
     );
 }
 
+
 export default ProductList;
+

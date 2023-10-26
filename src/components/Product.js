@@ -1,13 +1,10 @@
-import '../styles/layout/_product.scss'
+
 import imagen from "../images/imagen1.jpg";
 
 
 
-function Product({ product, onAddProduct }) {
+function Product({ product }) {
 
-    const handleClickAdd = () => {
-        onAddProduct(product);
-    }
 
     return (
 
@@ -27,7 +24,7 @@ function Product({ product, onAddProduct }) {
                     <p>
                         <span>{product.precio}</span>$
                     </p>
-                    <button onClick={handleClickAdd} type="button">buy now</button>
+                    <button type="button">buy now</button>
                 </div>
             </div>
 

@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Product from "./Product";
 import "../styles/App.scss";
 import Navbar from "./Navbar";
 import Login from "./Login";
@@ -7,24 +6,28 @@ import ProductList from "./ProductList";
 import Signup from "./Signup";
 import NotFound from './NotFound';
 import Hero from "./Hero";
-import { useState, useEffect } from "react";
-import getDataApi from "../services/apiFetch";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchProducts, setEntities } from '../store/slices/productsSlice';
+
 
 function App() {
 
-  const [productList, setProductList] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [countProducts, setCountProducts] = useState(0);
+
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productsSlice.entities);
+
 
   useEffect(() => {
-
     if (productList.length === 0) {
-      getDataApi().then((data) => {
-        setProductList(data);
+      dispatch(fetchProducts()).then((resultAction) => {
+        if (fetchProducts.fulfilled.match(resultAction)) {
+          dispatch(setEntities(resultAction.payload));
+        }
       });
     }
-  }, [productList]);
+  }, [productList, dispatch]);
+
 
 
   return (
@@ -32,12 +35,6 @@ function App() {
     <div className="app">
 
       <Navbar
-        allProducts={allProducts}
-        setAllProducts={setAllProducts}
-        total={total}
-        setTotal={setTotal}
-        countProducts={countProducts}
-        setCountProducts={setCountProducts}
       />
       <div className="app__container">
         <Routes>
@@ -46,14 +43,7 @@ function App() {
               <>
                 <Hero />
                 <ProductList
-                  allProducts={allProducts}
-                  setAllProducts={setAllProducts}
-                  total={total}
-                  setTotal={setTotal}
-                  countProducts={countProducts}
-                  setCountProducts={setCountProducts}
-                  Product={Product}
-                  productList={productList} />
+                />
 
               </>}
           ></Route>
