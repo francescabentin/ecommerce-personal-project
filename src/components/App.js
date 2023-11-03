@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts, setList } from '../store/slices/ProductsSlice';
 import ProductDetail from "./ProductDetail";
+import { userLoggedIn } from '../store/slices/SignUpSlice';
 
 
 
@@ -17,18 +18,31 @@ function App() {
 
 
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.productsSlice.productList);
+  const productList = useSelector((state) => state.productsSlice.productList); 
+  const user = useSelector((state) => state.SignUpSlice.user);
+  console.log(user)
+
+
 
 
   useEffect(() => {
-
     if (productList.length === 0) {
       dispatch(fetchProducts()).then((resultAction) => {
-          dispatch(setList(resultAction.payload));
-
+        dispatch(setList(resultAction.payload));
       });
     }
-  }, [productList, dispatch]);
+  }, [productList.length, dispatch]);
+
+
+  useEffect(() => {
+    const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
+
+    if (userFromLocalStorage) {
+
+      dispatch(userLoggedIn(userFromLocalStorage));
+    }
+  }, [dispatch]);
+
 
 
 

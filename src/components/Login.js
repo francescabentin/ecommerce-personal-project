@@ -1,18 +1,58 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../styles/layout/login.scss";
+import { signIn, userLoggedIn } from '../store/slices/SignUpSlice';
+import { useDispatch,/* useSelector */ } from 'react-redux';
+import { useState } from 'react';
+
 
 
 
 
 function Login() {
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
 
+    const dispatch = useDispatch();
+
+    const handleEvent = (e) => {
+        e.preventDefault();
+    }
+    const handleEmail = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const handlePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+
+    const Navigate = useNavigate();
+
+    const onHandlerSignIn = () => {
+        const payload = { email, password };
+        dispatch(signIn(payload))
+            .unwrap()
+            .then((response) => {
+                dispatch(userLoggedIn(response));
+                console.log('Inicio de sesión exitoso:', response);
+                localStorage.setItem('user', JSON.stringify(response));
+                Navigate('/');
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
+
+
+    // const isAuthenticated = useSelector((state) => state.SignUpSlice.isAuthenticated);
 
     return (
         <>
             <h1 className='h1'>LOGIN</h1>
-            <Form
+            <Form onClick={handleEvent}
                 name="normal_login"
                 className="login-form"
                 initialValues={{
@@ -23,7 +63,7 @@ function Login() {
                 <Form.Item
                     name="useremail"
 
-
+                    onChange={handleEmail}
                     rules={[
                         {
                             required: true,
@@ -35,6 +75,7 @@ function Login() {
                 </Form.Item>
                 <Form.Item
                     name="password"
+                    onChange={handlePassword}
                     rules={[
                         {
                             required: true,
@@ -59,12 +100,14 @@ function Login() {
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
+                    <Button type="primary" htmlType="submit" className="login-form-button"
+                        onClick={onHandlerSignIn}>
                         Log in
                     </Button>
                     Or <Link to={"/signup"}>Register now!</Link>
                 </Form.Item>
             </Form>
+
         </>
     )
 

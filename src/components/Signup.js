@@ -2,8 +2,8 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import "../styles/layout/login.scss";
-import { useDispatch, useSelector } from 'react-redux';
-import { signUp } from '../store/slices/SignUpSlice';
+import { useDispatch,/* useSelector*/ } from 'react-redux';
+import { signUp, userLoggedIn } from '../store/slices/SignUpSlice';
 import { useState } from 'react';
 
 
@@ -14,20 +14,38 @@ function Signup() {
     const [email, setEmail] = useState('')
     const dispatch = useDispatch();
 
-    const onHandlerSignUp = async (e) => {
+    const handleEvent = (e) => {
         e.preventDefault();
-        const payload = { email, password };
-        dispatch(signUp(payload));
+    }
+    const handleEmail = (e) => {
+        setEmail(e.target.value)
     }
 
-    const user = useSelector((state) => state.SignUpSlice.user);
-    console.log(user.email, user.password)
+    const handlePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const onHandlerSignUp = async () => {
+        const payload = { email, password };
+        dispatch(signUp(payload))
+            .then((response) => {
+                dispatch(userLoggedIn(response));
+
+            }).catch((error) => {
+                console.log('error', error);
+            })
+
+    }
+
+    //const user = useSelector((state) => state.SignUpSlice.user);
+
+
 
 
     return (
         <>
             <h1 className='h1'>SIGN UP</h1>
-            <Form
+            <Form onClick={handleEvent}
                 name="normal_login"
                 className="login-form"
                 initialValues={{
@@ -43,7 +61,7 @@ function Signup() {
                             message: 'Please input your Username!',
                         },
                     ]}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleEmail}
                 >
                     <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                 </Form.Item>
@@ -60,7 +78,7 @@ function Signup() {
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="Password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePassword}
                     />
                 </Form.Item>
                 <Form.Item>

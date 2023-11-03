@@ -4,9 +4,9 @@
   position: fixed;
   display: flex;
   justify-content: space-between;
-  background-color: rgba(190, 190, 164, 100);
+  background-color: rgb(195, 195, 220);
   align-items: center;
-  color: black;
+  color: white;
   font-size: 20px;
    z-index: 10000;
   height: 80px;
@@ -31,7 +31,7 @@
     transition: opacity 0.9s ease, transform 0.9s ease;
     z-index: 999;
     height: 100vh;
-    background-color: rgba(190, 190, 164, 0.900);
+    background-color: rgba(186, 164, 190, 0.9);
     color: black;
 
     &__cart {

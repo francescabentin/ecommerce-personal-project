@@ -8,6 +8,8 @@ const initialState = {
     isLoading: false,
     isError: false,
     error: null,
+
+
 }
 
 export const SignupSlice = createSlice({
@@ -23,6 +25,7 @@ export const SignupSlice = createSlice({
             state.user = null;
             state.isAuthenticated = false;
         },
+
 
     },
     extraReducers: (builder) => {
@@ -41,7 +44,30 @@ export const SignupSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
                 state.error = action.error.message;
+
+            })
+            .addCase(signIn.pending, (state) => {
+                state.isLoading = true;
+                state.isError = false;
+                state.error = null;
+            })
+            .addCase(signIn.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.user = action.payload;
+                state.isAuthenticated = true;
+            })
+            .addCase(signIn.rejected, (state, action) => {
+                if (action.error.message === 'INVALID_LOGIN_CREDENTIALS') {
+                    state.isAuthenticated = false;
+                    state.error = 'Credenciales incorrectas';
+                } else {
+                    state.isLoading = false;
+                    state.isError = true;
+                    state.error = action.error.message;
+                }
+
             });
+
     },
 });
 
@@ -57,6 +83,7 @@ export const signUp = createAsyncThunk(
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(payload),
+
             });
 
             if (response.ok) {
@@ -71,6 +98,36 @@ export const signUp = createAsyncThunk(
         }
     }
 );
+
+
+export const signIn = createAsyncThunk(
+    'auth/signIn',
+    async (payload, thunkAPI) => {
+        try {
+            const response = await fetch(`${FIREBASE_AUTH_BASEURL}${FIREBASE_API_AUTH_SIGN_IN_URL}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const data = await response.json();
+            if (data.error) {
+                return thunkAPI.rejectWithValue('algo salio mal');
+
+
+            }
+            return data
+        }
+        catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
+
+
+
 
 
 

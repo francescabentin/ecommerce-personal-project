@@ -14,7 +14,13 @@ function Navbar() {
     const isCartActive = useSelector((state) => state.NavbarSlice.isCartActive);
     const allProducts = useSelector((state) => state.CartSlice.allProducts);
 
-    const total = useSelector((state) => state.CartSlice.total)
+    const identification = useSelector(
+        (state) => state.SignUpSlice.isAuthenticated
+    );
+
+    const user = useSelector((state) => state.SignUpSlice.user);
+
+    const total = useSelector((state) => state.CartSlice.total);
 
     const dispatch = useDispatch();
 
@@ -32,13 +38,16 @@ function Navbar() {
 
     const handleRemoveItem = (product) => {
         dispatch(removeItem(product));
-    }    
+    };
 
     const handleClearAll = () => {
         dispatch(clearCart());
-    }
+    };
 
-    const totalProducts = allProducts.reduce((total, product) => total + product.quantity, 0);
+    const totalProducts = allProducts.reduce(
+        (total, product) => total + product.quantity,
+        0
+    );
 
     return (
         <section className="sectionNavbar">
@@ -52,16 +61,20 @@ function Navbar() {
                 </div>
                 <ul className={`navbar__list ${isMenuVisible ? "show" : ""}`}>
                     <li>
-                        <p>Hello Guest</p>
+                        <p>
+                            {identification
+                                ? `Hi ${user.email.split("@")[0]}`
+                                : "Hello Guest"}
+                        </p>
                     </li>
                     <li>
                         <Link onClick={handleClickItem} to="login">
-                            login
+                            {user ? "log out" : "login"}
                         </Link>
                     </li>
                     <li>
                         <Link onClick={handleClickItem} to="signup">
-                            signup
+                            {user ? "" : "signup"}
                         </Link>
                     </li>
                     <li>
@@ -71,7 +84,7 @@ function Navbar() {
                                 style={{ width: "60px", height: "50px" }}
                                 alt="carrito de compras"></img>
                             <span className="navbar__list__cart__span">
-                                {/*countProducts*/}
+                                {totalProducts}
                             </span>
                         </div>
                     </li>
@@ -80,55 +93,52 @@ function Navbar() {
                     menu
                 </span>
 
-
                 <div
                     className={`container-cart-products ${isCartActive ? "" : "hidden-cart"
                         }`}>
-                    {
-                        allProducts.length ? (
-                    <>
-                        <div className="row-product">
-                                    {allProducts.map((product) => (
-                                <div className="cart-product" key={product.id}>
-                                    <div className="info-cart-product">
-                                                <span className="cantidad-producto-carrito">{product.quantity}</span>
-                                                <p className="titulo-producto-carrito">{product.title}</p>
-                                                <span className="precio-producto-carrito">
-                                                    $ {product.total}
-                                                </span>
+                    {allProducts.length ? (
+                        <>
+                            <div className="row-product">
+                                {allProducts.map((product) => (
+                                    <div className="cart-product" key={product.id}>
+                                        <div className="info-cart-product">
+                                            <span className="cantidad-producto-carrito">
+                                                {product.quantity}
+                                            </span>
+                                            <p className="titulo-producto-carrito">{product.title}</p>
+                                            <span className="precio-producto-carrito">
+                                                $ {product.total}
+                                            </span>
+                                        </div>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            onClick={() => handleRemoveItem(product)}
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="icon-close">
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M6 18L18 6M6 6l12 12"
+                                            />
+                                        </svg>
                                     </div>
-                                            <svg 
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                                onClick={() => handleRemoveItem(product)}
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={1.5}
-                                        stroke="currentColor"
-                                                className="icon-close"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M6 18L18 6M6 6l12 12"
-                                        />
-                                    </svg>
+                                ))}
+                            </div>
 
-                                </div>
-                                    ))}
-                        </div>
-
-                        <div className="cart-total ">
-                                    <h3>{totalProducts} </h3>
-                                    <span className="total-pagar">{total}</span>
-                        </div>
-                                <button onClick={() => handleClearAll()}
-                                    className="btn-clearall">
-                                    Vaciar Carrito
-                                </button>
-                    </>
-                        ) : (
-                    <p className="cart-empty">El carrito está vacío</p>
-                        )}
+                            <div className="cart-total ">
+                                <h3>{totalProducts} </h3>
+                                <span className="total-pagar">{total}</span>
+                            </div>
+                            <button onClick={() => handleClearAll()} className="btn-clearall">
+                                Vaciar Carrito
+                            </button>
+                        </>
+                    ) : (
+                        <p className="cart-empty">El carrito está vacío</p>
+                    )}
                 </div>
             </div>
         </section>
