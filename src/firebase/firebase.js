@@ -1,6 +1,22 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+
+
+export const FIREBASE_API_KEY = 'AIzaSyC6JQUqlTZUj_qMW3zcqTFOI6VJYA3DO0o';
+
+export const FIREBASE_API_AUTH_SIGN_UP_URL = `:signUp?key=${FIREBASE_API_KEY}`;
+export const FIREBASE_API_AUTH_SIGN_IN_URL = `:signInWithPassword?key=${FIREBASE_API_KEY}`;
+
+export const FIREBASE_AUTH_BASEURL = "https://identitytoolkit.googleapis.com/v1/accounts";
+
+
+
+
+
+
+
+
+
+
+/*
 
 const firebaseConfig = {
     apiKey: "AIzaSyC6JQUqlTZUj_qMW3zcqTFOI6VJYA3DO0o",
@@ -15,3 +31,4 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+*/

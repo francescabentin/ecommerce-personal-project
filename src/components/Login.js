@@ -9,10 +9,6 @@ import "../styles/layout/login.scss";
 function Login() {
 
 
-
-
-
-
     return (
         <>
             <h1 className='h1'>LOGIN</h1>
@@ -66,7 +62,7 @@ function Login() {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    Or <Link to={"/sign up"}>Register now!</Link>
+                    Or <Link to={"/signup"}>Register now!</Link>
                 </Form.Item>
             </Form>
         </>

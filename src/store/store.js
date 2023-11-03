@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import products from './slices/ProductsSlice';
 import Navbar from './slices/NavbarSlice';
 import Cart from './slices/CartSlice';
+import SignUpSlice from './slices/SignUpSlice';
 
 
 const store = configureStore({
@@ -10,8 +11,10 @@ const store = configureStore({
     NavbarSlice: Navbar,
     productsSlice: products,
     CartSlice: Cart,
+    SignUpSlice: SignUpSlice
 
   },
+
   middleware: [thunk],
   devTools: process.env.NODE_ENV !== 'production',
 });
