@@ -1,4 +1,4 @@
-# eCommerce Online Store (Work-in-progress)
+# eCommerce Online Store MADE WITH REDUX (Work-in-progress)
 
 
 ## Description
@@ -20,10 +20,10 @@ Responsive Design: The application is designed to be responsive, providing a sea
 Work-in-Progress: The project is actively being developed and improved. Additional features and enhancements will be added regularly.
 
 ## Technologies Used
-React: JavaScript library for building user interfaces.
+React-redux library for global states and components.
 React Router: For client-side routing within the application.
 HTML/CSS: For structuring and styling the user interface.
-JavaScript ES6: For programming the application logic.
+JavaScript ES6: For programming the application logic and interface.
 
 ## Steps to start the project:
 
