@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import "../styles/layout/login.scss";
 import { signIn, userLoggedIn } from '../store/slices/SignUpSlice';
-import { useDispatch,/* useSelector */ } from 'react-redux';
+import { useDispatch, /*useSelector*/ } from 'react-redux';
 import { useState } from 'react';
 
 
@@ -30,20 +30,22 @@ function Login() {
 
     const Navigate = useNavigate();
 
-    const onHandlerSignIn = () => {
+    const onHandlerSignIn = async () => {
         const payload = { email, password };
         dispatch(signIn(payload))
-            .unwrap()
             .then((response) => {
-                dispatch(userLoggedIn(response));
-                console.log('Inicio de sesión exitoso:', response);
+                dispatch(userLoggedIn(response.payload));
+                console.log('Registro exitoso:', response);
                 localStorage.setItem('user', JSON.stringify(response));
                 Navigate('/');
+
+            }).catch((error) => {
+                console.log('error', error);
             })
-            .catch((error) => {
-                console.log(error)
-            });
+
     }
+
+
 
 
 

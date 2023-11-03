@@ -5,6 +5,7 @@ import "../styles/layout/login.scss";
 import { useDispatch,/* useSelector*/ } from 'react-redux';
 import { signUp, userLoggedIn } from '../store/slices/SignUpSlice';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,19 +26,22 @@ function Signup() {
         setPassword(e.target.value)
     }
 
+    const Navigate = useNavigate();
+
     const onHandlerSignUp = async () => {
         const payload = { email, password };
         dispatch(signUp(payload))
             .then((response) => {
-                dispatch(userLoggedIn(response));
+                dispatch(userLoggedIn(response.payload));
+                console.log('Registro exitoso:', response);
+                localStorage.setItem('user', JSON.stringify(response.payload));
+                Navigate('/');
 
             }).catch((error) => {
                 console.log('error', error);
             })
 
     }
-
-    //const user = useSelector((state) => state.SignUpSlice.user);
 
 
 

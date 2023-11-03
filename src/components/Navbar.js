@@ -8,6 +8,7 @@ import {
     toggleActive,
 } from "../store/slices/NavbarSlice";
 import { removeItem, clearCart } from "../store/slices/CartSlice";
+import { userLoggedOut } from "../store/slices/SignUpSlice";
 
 function Navbar() {
     const isMenuVisible = useSelector((state) => state.NavbarSlice.isMenuVisible);
@@ -18,7 +19,9 @@ function Navbar() {
         (state) => state.SignUpSlice.isAuthenticated
     );
 
+
     const user = useSelector((state) => state.SignUpSlice.user);
+
 
     const total = useSelector((state) => state.CartSlice.total);
 
@@ -31,6 +34,8 @@ function Navbar() {
     const handleClickItem = () => {
         dispatch(CloseMenu());
     };
+
+
 
     const handleCartEvent = () => {
         dispatch(toggleActive());
@@ -49,6 +54,17 @@ function Navbar() {
         0
     );
 
+
+
+    const handleLogs = () => {
+
+
+        localStorage.removeItem('user');
+        dispatch(userLoggedOut());
+        console.log('logginOut')
+    }
+
+
     return (
         <section className="sectionNavbar">
             <div className="navbar">
@@ -61,17 +77,24 @@ function Navbar() {
                 </div>
                 <ul className={`navbar__list ${isMenuVisible ? "show" : ""}`}>
                     <li>
-                        <p>
+                        <p className="guest">
                             {identification
-                                ? `Hi ${user.email.split("@")[0]}`
-                                : "Hello Guest"}
+                                ? `Hi ${user ? user.email.split('@')[0] : 'guest'}` :
+                                "hello Guest"}
+
                         </p>
                     </li>
-                    <li>
-                        <Link onClick={handleClickItem} to="login">
-                            {user ? "log out" : "login"}
+                    <li className={user ? "hidden" : ""}>
+                        <Link onClick={handleClickItem} to="/login">
+                            LOGIN
                         </Link>
                     </li>
+                    <li className={user ? "" : "hidden"}>
+                        <Link onClick={handleLogs} to="#">
+                            LOGOUT
+                        </Link>
+                    </li>
+
                     <li>
                         <Link onClick={handleClickItem} to="signup">
                             {user ? "" : "signup"}

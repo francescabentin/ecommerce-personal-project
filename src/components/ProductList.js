@@ -21,7 +21,7 @@ function ProductList() {
 
     }
 
-    console.log(productList)
+
 
 
     const renderProducts = () => {

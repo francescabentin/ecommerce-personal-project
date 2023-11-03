@@ -39,8 +39,9 @@ function App() {
 
     if (userFromLocalStorage) {
 
-      dispatch(userLoggedIn(userFromLocalStorage));
-    }
+      dispatch(userLoggedIn(userFromLocalStorage.payload));
+    } 
+
   }, [dispatch]);
 
 

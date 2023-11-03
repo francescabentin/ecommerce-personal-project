@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { FIREBASE_API_KEY, FIREBASE_API_AUTH_SIGN_UP_URL, FIREBASE_AUTH_BASEURL, FIREBASE_API_AUTH_SIGN_IN_URL } from '../../firebase/firebase';
+import { FIREBASE_API_AUTH_SIGN_UP_URL, FIREBASE_AUTH_BASEURL, FIREBASE_API_AUTH_SIGN_IN_URL } from '../../firebase/firebase';
 
 const initialState = {
 
-    user: null,
+    user: {},
     isAuthenticated: false,
     isLoading: false,
     isError: false,
