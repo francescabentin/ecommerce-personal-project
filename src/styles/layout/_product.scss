@@ -1,6 +1,12 @@
 .detail{
-  padding: 10%;
+  padding-top: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
 }
+
+
 .wrapper {
   max-width: 350px;
   display: flex;
@@ -9,20 +15,20 @@
   border-radius: 7px 7px 7px 7px;
   box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
   transition: all .5s;
+
 }
 
 .wrapper:hover {
-    transform: scale(1.2);
+   // transform: scale(1.2);
 }
 
 .product-img {
 
-    overflow: hidden;
   img {
     padding: 20px;
     border-radius: 7px 0 0 7px;
     width: 150px;
-    height: 250px;
+    height: 150px;
 
    
   }
@@ -38,27 +44,29 @@ padding: 5px;
   h1 {
     font-size: 20px;
     color: #474747;
+    text-align: left;
   }
 
   h1,
   .product-price-btn p {
-    font-family: 'Bentham', serif;
+     font-family: 'Tajawal';
+     font-weight: bolder;
+   
   }
 
   h2 {
  
-    font-size: 13px;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
+padding-bottom: 10px;
+     font-family: 'Tajawal';
     text-transform: uppercase;
-    color: #d2d2d2;
+    color: black;
     letter-spacing: 0.2em;
   }
 
   p {
     
     height: 125px;
-    font-family: 'Playfair Display', serif;
+     font-family: 'Tajawal';  
     color: #8d8d8d;
     line-height: 1.7em;
     font-size: 15px;
@@ -72,6 +80,8 @@ padding: 5px;
 display: flex;
 justify-content: flex-end;
 
+margin-bottom: 10px;
+
   p {
 
     font-family: 'Trocchi', serif;
@@ -82,24 +92,25 @@ justify-content: flex-end;
 
   span {
     display: inline-block;
-    height: 50px;
-    font-family: 'Suranna', serif;
-    font-size: 34px;
+ 
+     font-family: 'Tajawal';
+    font-size: 3rem;
+    padding: 10px;
   }
 
   button {
     float: right;
-    margin: 0 40px 0 16px;
+    margin-left: 20px;
     box-sizing: border-box;
     border: transparent;
     border-radius: 60px;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Tajawal';
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: #ffffff;
-    background-color: #9cebd5;
+    background-color: #9f9ceb;
     cursor: pointer;
     outline: none;
 
@@ -113,3 +124,8 @@ justify-content: flex-end;
   display: none;
 }
 
+.detalle{
+  color: red;
+  font-family: 'tajawal';
+  font-size: 1.5rem;
+}

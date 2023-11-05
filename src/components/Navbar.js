@@ -9,6 +9,7 @@ import {
 } from "../store/slices/NavbarSlice";
 import { removeItem, clearCart } from "../store/slices/CartSlice";
 import { userLoggedOut } from "../store/slices/SignUpSlice";
+import menu from "../images/icons8-menú-64.png";
 
 function Navbar() {
     const isMenuVisible = useSelector((state) => state.NavbarSlice.isMenuVisible);
@@ -19,9 +20,7 @@ function Navbar() {
         (state) => state.SignUpSlice.isAuthenticated
     );
 
-
     const user = useSelector((state) => state.SignUpSlice.user);
-
 
     const total = useSelector((state) => state.CartSlice.total);
 
@@ -34,8 +33,6 @@ function Navbar() {
     const handleClickItem = () => {
         dispatch(CloseMenu());
     };
-
-
 
     const handleCartEvent = () => {
         dispatch(toggleActive());
@@ -54,15 +51,11 @@ function Navbar() {
         0
     );
 
-
-
     const handleLogs = () => {
-
-        localStorage.removeItem('user');
+        localStorage.removeItem("user");
         dispatch(userLoggedOut());
-        console.log('logginOut')
-    }
-
+        console.log("logginOut");
+    };
 
     return (
         <section className="sectionNavbar">
@@ -78,9 +71,8 @@ function Navbar() {
                     <li>
                         <p className="guest">
                             {identification
-                                ? `Hi ${user ? user.email.split('@')[0] : 'guest'}` :
-                                "hello Guest"}
-
+                                ? `Hi ${user ? user.email.split("@")[0] : "guest"}`
+                                : "hello Guest"}
                         </p>
                     </li>
                     <li className={user ? "hidden" : ""}>
@@ -105,14 +97,12 @@ function Navbar() {
                                 src={cart}
                                 style={{ width: "60px", height: "50px" }}
                                 alt="carrito de compras"></img>
-                            <span className="navbar__list__cart__span">
-                                {totalProducts}
-                            </span>
+                            <span className="navbar__list__cart__span">{totalProducts}</span>
                         </div>
                     </li>
                 </ul>
                 <span onClick={handleClickEvent} className="menuhidden">
-                    menu
+                    <img className="menu" src={menu} alt="menu"></img>
                 </span>
 
                 <div

@@ -35,8 +35,8 @@ function ProductDetail() {
                 <div className="product-info">
                     <div className="product-text">
                         <h1 >{product.title}</h1>
-                        <h2 className='hidden'>{product.category}</h2>
-                        <p className='hidden'>
+                        <h2 >{product.category}</h2>
+                        <p >
                             {product.description}
                         </p>
                     </div>

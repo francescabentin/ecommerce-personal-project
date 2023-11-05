@@ -114,14 +114,13 @@ export const signIn = createAsyncThunk(
 
             const data = await response.json();
             if (data.error) {
-                return thunkAPI.rejectWithValue('algo salio mal');
-
+                return thunkAPI.rejectWithValue({ error: 'algo salio mal' });
 
             }
             return data
         }
         catch (error) {
-            return thunkAPI.rejectWithValue(error);
+            return thunkAPI.rejectWithValue({ error });
         }
     }
 );

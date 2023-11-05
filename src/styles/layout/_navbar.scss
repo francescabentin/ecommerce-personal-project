@@ -1,4 +1,5 @@
 .navbar {
+  font-family: 'Tajawal';
   width: 100%;
   padding: 20px 0px;
   position: fixed;
@@ -41,6 +42,7 @@
       position: absolute;
       top: 55%;
       right: 0;
+     
     }
 
   }
@@ -72,9 +74,13 @@
 
   & h1 {
     padding-left: 15px;
-    font-size: 2.5rem;
+    font-family: 'Tajawal';
+    font-size: 2rem;
     color: black;
     font-weight: bold;
+      @media (min-width: 768px){
+        font-size: 3rem;
+      }
   }
 
   & a {
@@ -106,7 +112,10 @@
     transform: translateY(0);
 }
 
-
+.menu{
+  width: 50px;
+  height: 50px;
+}
 .container-cart-products{
     position: absolute;
     top: 50px;

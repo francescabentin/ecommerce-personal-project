@@ -32,11 +32,9 @@ function ProductList() {
                 </div>
                 <div className="product-info">
                     <div className="product-text">
-                        <h1 >{product.titulo}</h1>
+                        <h1 >{product.title}</h1>
                         <h2 >{product.category}</h2>
-                        <p >
-                            {product.description}
-                        </p>
+
                     </div>
                     <div className="product-price-btn">
                         <p>
@@ -44,7 +42,7 @@ function ProductList() {
                         </p>
                         <button onClick={() => handleAddItem(product)} type="button">buy now</button>
                     </div>
-                    <Link to={`/product-detail/${product.id}`}>details</Link>
+                    <Link className="detalle" to={`/product-detail/${product.id}`}>details</Link>
                 </div>
 
             </div>

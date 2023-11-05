@@ -34,12 +34,19 @@ function Login() {
         const payload = { email, password };
         dispatch(signIn(payload))
             .then((response) => {
-                dispatch(userLoggedIn(response.payload));
-                console.log('Registro exitoso:', response);
-                localStorage.setItem('user', JSON.stringify(response));
-                Navigate('/');
+                if (response.error) {
+                    console.log('Error en el registro:', response.error);
 
-            }).catch((error) => {
+
+                } else {
+                    dispatch(userLoggedIn(response.payload));
+                    console.log('Registro exitoso:', response);
+                    localStorage.setItem('user', JSON.stringify(response));
+                    Navigate('/');
+                }
+
+            })
+            .catch((error) => {
                 console.log('error', error);
             })
 
@@ -64,7 +71,6 @@ function Login() {
             >
                 <Form.Item
                     name="useremail"
-
                     onChange={handleEmail}
                     rules={[
                         {
@@ -85,7 +91,7 @@ function Login() {
                         },
                     ]}
                 >
-                    <Input
+                    <Input className='input'
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="Password"
