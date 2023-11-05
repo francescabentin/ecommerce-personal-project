@@ -58,7 +58,6 @@ function Navbar() {
 
     const handleLogs = () => {
 
-
         localStorage.removeItem('user');
         dispatch(userLoggedOut());
         console.log('logginOut')

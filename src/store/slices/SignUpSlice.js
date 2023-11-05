@@ -3,7 +3,7 @@ import { FIREBASE_API_AUTH_SIGN_UP_URL, FIREBASE_AUTH_BASEURL, FIREBASE_API_AUTH
 
 const initialState = {
 
-    user: {},
+    user: null,
     isAuthenticated: false,
     isLoading: false,
     isError: false,
