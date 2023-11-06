@@ -34,10 +34,10 @@ function Signup() {
         const payload = { email, password };
         dispatch(signUp(payload))
             .then((response) => {
-                if (!response.payload.type === 'auth/signUp/rejected') {
-                dispatch(userLoggedIn(response.payload));
-                console.log('Registro exitoso:', response);
-                localStorage.setItem('user', JSON.stringify(response.payload));
+                if (response.payload !== "INVALID_EMAIL" && response.payload !== "WEAK_PASSWORD : Password should be at least 6 characters" && response.payload !== "MISSING_PASSWORD") {
+                    dispatch(userLoggedIn(response.payload));
+                    console.log('Registro exitoso:', response);
+                    localStorage.setItem('user', JSON.stringify(response.payload));
                     Navigate('/');
                 } else {
                     setError('Error: El usuario no se creó con éxito.');

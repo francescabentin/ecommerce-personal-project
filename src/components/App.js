@@ -5,6 +5,7 @@ import Login from "./Login";
 import ProductList from "./ProductList";
 import Signup from "./Signup";
 import NotFound from './NotFound';
+import Cart from "./Cart";
 import Hero from "./Hero";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -67,6 +68,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/product-detail/:productId" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

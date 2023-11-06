@@ -38,6 +38,10 @@ function Navbar() {
         dispatch(toggleActive());
     };
 
+    const handleCloseCart = () => {
+        dispatch(toggleActive(!isCartActive))
+    }
+
     const handleRemoveItem = (product) => {
         dispatch(removeItem(product));
     };
@@ -71,8 +75,10 @@ function Navbar() {
                     <li>
                         <p className="guest">
                             {identification
-                                ? `Hi ${user ? user.email.split("@")[0] : "guest"}`
-                                : "hello Guest"}
+                                ? user && user.email
+                                    ? `Hi ${user.email.split("@")[0]}`
+                                    : "Hi guest"
+                                : "Hello Guest"}
                         </p>
                     </li>
                     <li className={user ? "hidden" : ""}>
@@ -147,6 +153,11 @@ function Navbar() {
                             <button onClick={() => handleClearAll()} className="btn-clearall">
                                 Vaciar Carrito
                             </button>
+                            <Link to="/cart">
+                                <button onClick={handleCloseCart} className="btn-clearall">
+                                    ir al carrito
+                                </button>
+                            </Link>
                         </>
                     ) : (
                         <p className="cart-empty">El carrito está vacío</p>

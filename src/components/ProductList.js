@@ -5,6 +5,7 @@ import imagen from "../images/imagen1.jpg";
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from "../store/slices/CartSlice";
 import { Link } from 'react-router-dom';
+import { useState } from "react";
 
 
 
@@ -12,7 +13,13 @@ import { Link } from 'react-router-dom';
 function ProductList() {
 
     const { productList } = useSelector((state) => state.productsSlice);
+    const [search, setSearch] = useState('')
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+        setSearch(e.target.value)
+
+    }
 
     const dispatch = useDispatch();
 
@@ -25,7 +32,10 @@ function ProductList() {
 
 
     const renderProducts = () => {
-        return productList.map((product) => (
+        const filteredProducts = productList.filter((product) =>
+            product.title.toLowerCase().includes(search.toLowerCase())
+        );
+        return filteredProducts.map((product) => (
             <div key={product.id} className="wrapper">
                 <div className="product-img">
                     <img src={product.image || imagen} alt='product' />
@@ -54,7 +64,8 @@ function ProductList() {
             <h1 className="app__container__productlist__h1">
                 Lo mas vendido , elije la categoria que desees
             </h1>
-            <Input.Search placeholder='Buscar...' />
+            <Input.Search onChange={handleSearch} value={search}
+                className="inputSearch" placeholder='Buscar...' />
 
             <section
                 className="app__container__productlist

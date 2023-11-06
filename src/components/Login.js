@@ -35,7 +35,7 @@ function Login() {
         const payload = { email, password };
         dispatch(signIn(payload))
             .then((response) => {
-                if (!response.registered === true) {
+                if (response.registered === true) {
                     dispatch(userLoggedIn(response.payload));
                     console.log('Registro exitoso:', response);
                     localStorage.setItem('user', JSON.stringify(response.payload));
