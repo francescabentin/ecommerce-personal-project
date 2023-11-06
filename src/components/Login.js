@@ -13,6 +13,7 @@ import { useState } from 'react';
 function Login() {
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
+    const [error, setError] = useState('');
 
     const dispatch = useDispatch();
 
@@ -34,20 +35,19 @@ function Login() {
         const payload = { email, password };
         dispatch(signIn(payload))
             .then((response) => {
-                if (response.error) {
-                    console.log('Error en el registro:', response.error);
-
-
-                } else {
+                if (!response.registered === true) {
                     dispatch(userLoggedIn(response.payload));
                     console.log('Registro exitoso:', response);
-                    localStorage.setItem('user', JSON.stringify(response));
-                    Navigate('/');
+                    localStorage.setItem('user', JSON.stringify(response.payload));
+                    Navigate('/'); 
+                } else {
+                    setError('Error: El email o contraseña no son validos!.');
                 }
-
-            })
+            }) 
             .catch((error) => {
                 console.log('error', error);
+                setError('Error de autenticación. Inténtalo de nuevo.');
+                Navigate('/login');
             })
 
     }
@@ -64,32 +64,19 @@ function Login() {
             <Form onClick={handleEvent}
                 name="normal_login"
                 className="login-form"
-                initialValues={{
-                    remember: true,
-                }}
 
             >
                 <Form.Item
                     name="useremail"
                     onChange={handleEmail}
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your Username!',
-                        },
-                    ]}
+
                 >
                     <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                 </Form.Item>
                 <Form.Item
                     name="password"
                     onChange={handlePassword}
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your Password!',
-                        },
-                    ]}
+
                 >
                     <Input className='input'
                         prefix={<LockOutlined className="site-form-item-icon" />}
@@ -115,6 +102,7 @@ function Login() {
                     Or <Link to={"/signup"}>Register now!</Link>
                 </Form.Item>
             </Form>
+            {error && <div className="error-message">{error}</div>}
 
         </>
     )

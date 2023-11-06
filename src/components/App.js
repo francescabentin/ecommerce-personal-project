@@ -39,7 +39,7 @@ function App() {
 
     if (userFromLocalStorage) {
 
-      dispatch(userLoggedIn(userFromLocalStorage.payload));
+      dispatch(userLoggedIn(userFromLocalStorage));
     } 
 
   }, [dispatch]);
@@ -64,8 +64,8 @@ function App() {
 
               </>}
           ></Route>
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/product-detail/:productId" element={<ProductDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

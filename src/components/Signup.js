@@ -9,10 +9,12 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-//
+
 function Signup() {
-    const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
+
     const dispatch = useDispatch();
 
     const handleEvent = (e) => {
@@ -32,14 +34,21 @@ function Signup() {
         const payload = { email, password };
         dispatch(signUp(payload))
             .then((response) => {
+                if (!response.payload.type === 'auth/signUp/rejected') {
                 dispatch(userLoggedIn(response.payload));
                 console.log('Registro exitoso:', response);
                 localStorage.setItem('user', JSON.stringify(response.payload));
-                Navigate('/');
+                    Navigate('/');
+                } else {
+                    setError('Error: El usuario no se creó con éxito.');
+                }
 
-            }).catch((error) => {
-                console.log('error', error);
             })
+            .catch((error) => {
+                console.log('Error de autenticación:', error.message);
+                setError('Error de autenticación. Inténtalo de nuevo.');
+                Navigate('/signup');
+            });
 
     }
 
@@ -52,31 +61,18 @@ function Signup() {
             <Form onClick={handleEvent}
                 name="normal_login"
                 className="login-form"
-                initialValues={{
-                    remember: true,
-                }}
 
             >
                 <Form.Item
                     name="useremail"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your Username!',
-                        },
-                    ]}
+
                     onChange={handleEmail}
                 >
                     <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                 </Form.Item>
                 <Form.Item
                     name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your Password!',
-                        },
-                    ]}
+
                 >
                     <Input
                         prefix={<LockOutlined className="site-form-item-icon" />}
@@ -103,6 +99,7 @@ function Signup() {
                     Or <Link to={"/login"}>Log In!</Link>
                 </Form.Item>
             </Form>
+            {error && <div className="error-message">{error}</div>}
         </>
     )
 
