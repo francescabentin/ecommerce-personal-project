@@ -40,6 +40,7 @@ function Navbar() {
 
     const handleCloseCart = () => {
         dispatch(toggleActive(!isCartActive))
+        dispatch(CloseMenu());
     }
 
     const handleRemoveItem = (product) => {
@@ -68,7 +69,7 @@ function Navbar() {
                     { }
                     <Link to="/">
                         {" "}
-                        <h1>RedVelvetBoutique</h1>{" "}
+                        <h1 onClick={handleClickItem}>RedVelvetBoutique</h1>{" "}
                     </Link>
                 </div>
                 <ul className={`navbar__list ${isMenuVisible ? "show" : ""}`}>
@@ -125,7 +126,7 @@ function Navbar() {
                                             </span>
                                             <p className="titulo-producto-carrito">{product.title}</p>
                                             <span className="precio-producto-carrito">
-                                                $ {product.total}
+                                                ${product.total}
                                             </span>
                                         </div>
                                         <svg
@@ -146,16 +147,21 @@ function Navbar() {
                                 ))}
                             </div>
 
-                            <div className="cart-total ">
-                                <h3>{totalProducts} </h3>
-                                <span className="total-pagar">{total}</span>
+                            <div className="cart-total  ">
+                                <h3 className="hidden">{totalProducts} </h3>
+                                <span className="total-pagar">{`Total :  $ ${total}`}</span>
                             </div>
                             <button onClick={() => handleClearAll()} className="btn-clearall">
                                 Vaciar Carrito
                             </button>
                             <Link to="/cart">
                                 <button onClick={handleCloseCart} className="btn-clearall">
-                                    ir al carrito
+                                    Ir a la cesta
+                                </button>
+                            </Link>
+                            <Link to="/">
+                                <button onClick={handleCloseCart} className="btn-clearall">
+                                    Cerrar y seguir comprando
                                 </button>
                             </Link>
                         </>
