@@ -9,7 +9,7 @@ const root = createRoot(document.getElementById('root'));
 root.render(
 
   <Provider store={store}>
-    <BrowserRouter basename='/ecommerce-personal-project/'>
+    <BrowserRouter /*basename='/ecommerce-personal-project/'*/>
     <App />
   </BrowserRouter>
   </Provider >
