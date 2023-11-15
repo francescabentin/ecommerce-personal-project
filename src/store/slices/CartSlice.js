@@ -5,6 +5,7 @@ const initialState = {
     allProducts: [],
     total: 0,
 
+
 }
 
 export const CartSlice = createSlice({
@@ -50,8 +51,19 @@ export const CartSlice = createSlice({
             const cartData = JSON.parse(localStorage.getItem('cart'));
             if (cartData) {
                 state.allProducts = cartData
+                state.total = state.allProducts.reduce((total, p) => total + p.price * p.quantity, 0)
             } else {
                 return initialState
+            }
+        },
+        updateQuantity: (state, action) => {
+            const { product, quantity } = action.payload;
+            const existingProduct = state.allProducts.find(p => p.id === product.id);
+            console.log(existingProduct)
+
+            if (existingProduct) {
+                existingProduct.quantity = quantity
+                state.total = state.allProducts.reduce((total, p) => total + p.price * p.quantity, 0)
             }
         }
 
@@ -62,7 +74,7 @@ export const CartSlice = createSlice({
 
 
 
-export const { addItem, removeItem, clearCart, loadLocalStorage } = CartSlice.actions;
+export const { addItem, removeItem, clearCart, loadLocalStorage, updateQuantity } = CartSlice.actions;
 
 export default CartSlice.reducer;
 

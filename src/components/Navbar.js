@@ -22,7 +22,7 @@ function Navbar() {
 
     const user = useSelector((state) => state.SignUpSlice.user);
 
-    const total = useSelector((state) => state.CartSlice.total);
+    const total = useSelector((state) => state.CartSlice.total.toFixed(2));
 
     const dispatch = useDispatch();
 
@@ -49,6 +49,7 @@ function Navbar() {
 
     const handleClearAll = () => {
         dispatch(clearCart());
+        dispatch(CloseMenu());
     };
 
     const totalProducts = allProducts.reduce(
