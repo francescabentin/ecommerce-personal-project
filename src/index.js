@@ -10,7 +10,7 @@ const root = createRoot(document.getElementById('root'));
 root.render(
 
   <Provider store={store}>
-    <HashRouter basename='/ecommerce-personal-project/'>
+    <HashRouter>
       <App />
     </HashRouter>
   </Provider >
