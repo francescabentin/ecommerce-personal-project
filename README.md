@@ -1,4 +1,4 @@
-# eCommerce Online Store MADE WITH REDUX (Work-in-progress)
+# eCommerce Online Store - REDUX AND FIREBASE (Work-in-progress)
 
 
 ## Description
@@ -21,6 +21,7 @@ Work-in-Progress: The project is actively being developed and improved. Addition
 
 ## Technologies Used
 React-redux library for global states and components.
+FireBase: login, signup, and databases.
 React Router: For client-side routing within the application.
 HTML/CSS: For structuring and styling the user interface.
 JavaScript ES6: For programming the application logic and interface.
