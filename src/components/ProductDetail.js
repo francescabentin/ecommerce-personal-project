@@ -1,9 +1,11 @@
 import '../styles/layout/_product.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import imagen from "../images/imagen1.jpg";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { findProduct } from '../store/slices/ProductsSlice';
+import { addItem } from "../store/slices/CartSlice";
+
 
 
 
@@ -11,16 +13,20 @@ function ProductDetail() {
     const { productId } = useParams();
     const productIdNumber = parseInt(productId, 10);
     const product = useSelector((state) => state.productsSlice.product);
-    console.log(product);
+
 
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(findProduct({ productIdNumber }));
-        console.log({ productIdNumber })
+
     }, [dispatch, productIdNumber]);
 
 
+
+    const handleAddItem = (product) => {
+        dispatch(addItem(product))
+
+    }
 
 
     return (
@@ -28,7 +34,7 @@ function ProductDetail() {
         <section className='detail'>
             <div id={
                 product.id
-            } className="wrapper" >
+            } className="wrapper-detail" >
                 <div className="product-img">
                     <img src={product.image || imagen} alt='product' />
                 </div>
@@ -44,8 +50,9 @@ function ProductDetail() {
                         <p>
                             <span>{product.price}</span>$
                         </p>
-                        <button type="button">buy now</button>
+                        <button onClick={() => handleAddItem(product)} type="button">buy now</button>
                     </div>
+                    <Link className='back' to="/">go back</Link>
                 </div>
 
             </div >

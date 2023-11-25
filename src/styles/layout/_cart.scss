@@ -26,11 +26,12 @@
 
 @media screen and (min-width: 1024px) {
     .fondo {
-        padding-top: 10%;
+        padding-top: 20%;
         display: flex;
         flex-direction: row;
         margin: 0 100px;
-     
+        gap: 20px;
+       
     }
 
  .fondo > * {
@@ -90,7 +91,8 @@
  justify-content: space-between;
  width: 100%;
         @media  screen and (min-width:760px) {
-justify-content: left;
+justify-content: space-around;
+
 
 }
  @media  screen and (min-width:1024px) {
@@ -131,7 +133,7 @@ height: 100px;
 }
 
 .titulo{
-    padding-top: 20px;
+    text-align: center;
     font-size: 0.5rem;
     width: 100%;
 }
@@ -146,3 +148,13 @@ height: 100px;
 }
 
 
+.cesta{
+     font-size: 1.5rem;
+}
+
+.titulo_product {
+    max-width: 100px;
+    @media screen and (min-width:760px) {
+        max-width: 160px;
+    }
+}

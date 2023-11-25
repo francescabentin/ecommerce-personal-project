@@ -30,25 +30,25 @@ function Cart() {
         (total, product) => total + product.quantity,
         0
     );
-    console.log(allProducts);
+
 
     const handleUpdateQuantity = (product, newQuantity) => {
         dispatch(updateQuantity({ product, quantity: newQuantity }));
     };
 
     const total = useSelector((state) => state.CartSlice.total.toFixed(2));
-    console.log(total)
+
 
 
     return (
         <div className="fondo">
             <div className="cesta">
-                CESTA
-                <a className="borrar" onClick={() => handleClearAll()}>
+                {allProducts.length ? "CESTA" : "LA CESTA ESTA VACIA"}
+                <span className="borrar" onClick={() => handleClearAll()}>
                     {allProducts.length
                         ? "Anular la selección de todos los articulos"
                         : null}
-                </a>
+                </span>
                 <hr className="hr1" />
                 <div className="container">
                     <div className="row-product">
@@ -102,7 +102,7 @@ function Cart() {
                             ? `SUBTOTAL (${totalProducts} PRODUCTOS) : $${total} `
                             : null}{" "}
                     </h3>
-                    <button className="boton"> Tramitar Pedido</button>
+                    <button className={allProducts.length ? 'boton' : 'hidden'} > Tramitar Pedido</button>
                     <div>
                         <Link to="/">
                             <button className="boton">volver a lista de productos</button>

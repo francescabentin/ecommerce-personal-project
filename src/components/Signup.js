@@ -40,7 +40,7 @@ function Signup() {
                     localStorage.setItem('user', JSON.stringify(response.payload));
                     Navigate('/');
                 } else {
-                    setError('Error: El usuario no se creó con éxito.');
+                    setError('Error: Ponga bien su email y contraseña');
                 }
 
             })

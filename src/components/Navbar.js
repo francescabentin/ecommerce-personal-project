@@ -50,6 +50,7 @@ function Navbar() {
     const handleClearAll = () => {
         dispatch(clearCart());
         dispatch(CloseMenu());
+        dispatch(toggleActive(false));
     };
 
     const totalProducts = allProducts.reduce(
@@ -78,7 +79,7 @@ function Navbar() {
                         <p className="guest">
                             {identification
                                 ? user && user.email
-                                    ? `Hi ${user.email.split("@")[0]}`
+                                    ? `Hi ${user.email.split("@")[0]}!`
                                     : "Hi guest"
                                 : "Hello Guest"}
                         </p>
@@ -125,7 +126,7 @@ function Navbar() {
                                             <span className="cantidad-producto-carrito">
                                                 {product.quantity}
                                             </span>
-                                            <p className="titulo-producto-carrito">{product.title}</p>
+                                            <p className="titulo-producto-carrito">{product.title.slice(0, 10)}</p>
                                             <span className="precio-producto-carrito">
                                                 ${product.total}
                                             </span>
@@ -160,11 +161,11 @@ function Navbar() {
                                     Ir a la cesta
                                 </button>
                             </Link>
-                            <Link to="/">
+
                                 <button onClick={handleCloseCart} className="btn-clearall">
                                     Cerrar y seguir comprando
                                 </button>
-                            </Link>
+
                         </>
                     ) : (
                         <p className="cart-empty">El carrito está vacío</p>

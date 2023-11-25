@@ -20,10 +20,6 @@ function App() {
 
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productsSlice.productList); 
-  const user = useSelector((state) => state.SignUpSlice.user);
-  console.log(user)
-
-
 
 
   useEffect(() => {

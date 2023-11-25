@@ -42,7 +42,7 @@ function ProductList() {
                 </div>
                 <div className="product-info">
                     <div className="product-text">
-                        <h1 >{product.title}</h1>
+                        <h1 >{product.title.slice(0, 20)}</h1>
                         <h2 >{product.category}</h2>
 
                     </div>
