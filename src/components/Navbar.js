@@ -39,9 +39,9 @@ function Navbar() {
     };
 
     const handleCloseCart = () => {
-        dispatch(toggleActive(!isCartActive))
+        dispatch(toggleActive(!isCartActive));
         dispatch(CloseMenu());
-    }
+    };
 
     const handleRemoveItem = (product) => {
         dispatch(removeItem(product));
@@ -126,9 +126,11 @@ function Navbar() {
                                             <span className="cantidad-producto-carrito">
                                                 {product.quantity}
                                             </span>
-                                            <p className="titulo-producto-carrito">{product.title.slice(0, 10)}</p>
+                                            <p className="titulo-producto-carrito">
+                                                {product.title.slice(0, 10)}
+                                            </p>
                                             <span className="precio-producto-carrito">
-                                                ${product.total}
+                                                ${product.total.toFixed(2)}
                                             </span>
                                         </div>
                                         <svg
@@ -162,10 +164,9 @@ function Navbar() {
                                 </button>
                             </Link>
 
-                                <button onClick={handleCloseCart} className="btn-clearall">
-                                    Cerrar y seguir comprando
-                                </button>
-
+                            <button onClick={handleCloseCart} className="btn-clearall">
+                                Cerrar y seguir comprando
+                            </button>
                         </>
                     ) : (
                         <p className="cart-empty">El carrito está vacío</p>

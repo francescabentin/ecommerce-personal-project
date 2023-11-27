@@ -20,12 +20,14 @@ function App() {
 
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productsSlice.productList); 
+  console.log(productList);
 
 
   useEffect(() => {
     if (productList.length === 0) {
       dispatch(fetchProducts()).then((resultAction) => {
         dispatch(setList(resultAction.payload));
+        console.log(resultAction)
       });
     }
   }, [productList.length, dispatch]);

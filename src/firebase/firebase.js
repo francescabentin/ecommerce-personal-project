@@ -13,9 +13,6 @@ export const FIREBASE_AUTH_BASEURL = "https://identitytoolkit.googleapis.com/v1/
 
 
 
-
-
-
 /*
 
 const firebaseConfig = {
