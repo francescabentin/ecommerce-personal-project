@@ -1,4 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import app from '../../firebase/config';
+
+const firestore = getFirestore(app);
+
+
+export const syncCartWithFirebase = createAsyncThunk(
+    'cart/syncWithFirebase',
+    async (cart, { getState }) => {
+        try {
+            const user = getState().SignUpSlice.user;
+            if (!user) {
+                throw new Error('No hay usuario autenticado.');
+            }
+            const { localId, email } = user;
+            const cartData = cart.map(product => ({
+                id: product.id,
+                title: product.title,
+                quantity: product.quantity,
+                total: product.total,
+            }));
+            await setDoc(doc(firestore, 'usuarios', localId), {
+                email: email,
+                cesta: cartData,
+            });
+
+            return cart;
+        } catch (error) {
+            throw error;
+        }
+    }
+);
 
 
 const initialState = {
@@ -12,6 +44,11 @@ export const CartSlice = createSlice({
     name: 'CartSlice',
     initialState,
     reducers: {
+        clearAndSendCart: (state, action) => {
+            state.allProducts = [];
+            state.total = 0;
+            localStorage.setItem('cart', JSON.stringify(state.allProducts));
+        },
         addItem: (state, action) => {
             const productToAdd = action.payload;
             const existingProduct = state.allProducts.find((product) => product.id === productToAdd.id);
@@ -68,6 +105,16 @@ export const CartSlice = createSlice({
         }
 
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(syncCartWithFirebase.fulfilled, (state, action) => {
+                console.log('Cesta sincronizada exitosamente con Firebase:', action.payload);
+            })
+            .addCase(syncCartWithFirebase.rejected, (state, action) => {
+                console.error('Error al sincronizar la cesta con Firebase:', action.error);
+            });
+    },
+
 });
 
 

@@ -5,7 +5,7 @@ import {
     removeItem,
     clearCart,
     loadLocalStorage,
-    updateQuantity,
+    updateQuantity, syncCartWithFirebase
 } from "../store/slices/CartSlice";
 import { useEffect } from "react";
 
@@ -20,6 +20,8 @@ function Cart() {
 
     const handleRemoveItem = (product) => {
         dispatch(removeItem(product));
+        dispatch(syncCartWithFirebase(allProducts));
+
     };
 
     const handleClearAll = () => {

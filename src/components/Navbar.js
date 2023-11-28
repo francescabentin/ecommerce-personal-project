@@ -21,6 +21,7 @@ function Navbar() {
     );
 
     const user = useSelector((state) => state.SignUpSlice.user);
+    console.log(user)
 
     const total = useSelector((state) => state.CartSlice.total.toFixed(2));
 

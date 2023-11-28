@@ -1,5 +1,48 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { FIREBASE_API_AUTH_SIGN_UP_URL, FIREBASE_AUTH_BASEURL, FIREBASE_API_AUTH_SIGN_IN_URL } from '../../firebase/firebase';
+import app from '../../firebase/config';
+import { doc, setDoc, getFirestore, getDoc, updateDoc } from 'firebase/firestore';
+
+const firestore = getFirestore(app);
+
+async function createUserDocument(localId, userData) {
+    try {
+        await setDoc(doc(firestore, 'usuarios', localId), {
+            email: userData.email,
+            cesta: {}
+        });
+    } catch (error) {
+        console.error('Error al crear el documento del usuario:', error);
+        throw error;
+    }
+}
+
+async function updateUserDocument(userData) {
+    const { localId, email } = userData;
+
+    try {
+
+        const userDocRef = doc(firestore, 'usuarios', localId);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (userDocSnapshot.exists()) {
+
+            await updateDoc(userDocRef, {
+                email: email,
+            });
+            console.log('Documento del usuario actualizado exitosamente.');
+        } else {
+            console.warn('El campo "password" no es un string o es undefined.');
+        }
+
+    } catch (error) {
+        console.error('Error al actualizar el documento del usuario en Firestore:', error);
+        throw error;
+    }
+}
+
+
+
 
 const initialState = {
 
@@ -39,6 +82,7 @@ export const SignupSlice = createSlice({
                 state.isLoading = false;
                 state.user = action.payload;
                 state.isAuthenticated = true;
+                createUserDocument(action.payload);
             })
             .addCase(signUp.rejected, (state, action) => {
                 state.isLoading = false;
@@ -88,6 +132,8 @@ export const signUp = createAsyncThunk(
 
             if (response.ok) {
                 const data = await response.json();
+                const localId = data.localId;
+                await createUserDocument(localId, payload);
                 return data;
             } else {
                 const errorData = await response.json();
@@ -110,6 +156,7 @@ export const signIn = createAsyncThunk(
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(payload),
+
             });
 
             const data = await response.json();
@@ -117,6 +164,7 @@ export const signIn = createAsyncThunk(
                 return thunkAPI.rejectWithValue({ error: 'algo salio mal' });
 
             }
+            await updateUserDocument(data);
             return data
         }
         catch (error) {
