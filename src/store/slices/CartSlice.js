@@ -1,9 +1,39 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore';
 import app from '../../firebase/config';
+
 
 const firestore = getFirestore(app);
 
+
+export const loadCartFromFirebase = createAsyncThunk(
+    'cart/loadFromFirebase',
+    async (_, { getState }) => {
+        try {
+            const user = getState().SignUpSlice.user;
+            if (!user) {
+                throw new Error('No hay usuario autenticado.');
+            }
+
+            const { localId } = user;
+            const userDocRef = doc(firestore, 'usuarios', localId);
+            const userDocSnapshot = await getDoc(userDocRef);
+
+            if (userDocSnapshot.exists()) {
+                const userData = userDocSnapshot.data();
+                const cartData = userData.cesta || [];
+                console.log(cartData);
+                return cartData;
+
+            } else {
+
+                return [];
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+);
 
 export const syncCartWithFirebase = createAsyncThunk(
     'cart/syncWithFirebase',
@@ -84,15 +114,18 @@ export const CartSlice = createSlice({
             state.total = 0;
             localStorage.setItem('cart', JSON.stringify(state.allProducts))
         },
-        loadLocalStorage: (state) => {
-            const cartData = JSON.parse(localStorage.getItem('cart'));
+        loadCartStorage: (state, action) => {
+            const cartData = action.payload;
+
             if (cartData) {
-                state.allProducts = cartData
-                state.total = state.allProducts.reduce((total, p) => total + p.price * p.quantity, 0)
+                state.allProducts = cartData;
+                /*state.total = state.allProducts.reduce((total, p) => total + p.price * p.quantity, 0);*/
             } else {
-                return initialState
+                state.allProducts = [];
+                state.total = 0;
             }
         },
+
         updateQuantity: (state, action) => {
             const { product, quantity } = action.payload;
             const existingProduct = state.allProducts.find(p => p.id === product.id);
@@ -121,7 +154,7 @@ export const CartSlice = createSlice({
 
 
 
-export const { addItem, removeItem, clearCart, loadLocalStorage, updateQuantity } = CartSlice.actions;
+export const { addItem, removeItem, clearCart, loadCartStorage, updateQuantity } = CartSlice.actions;
 
 export default CartSlice.reducer;
 

@@ -5,16 +5,17 @@ import "../styles/layout/login.scss";
 import { signIn, userLoggedIn } from '../store/slices/SignUpSlice';
 import { useDispatch, /*useSelector*/ } from 'react-redux';
 import { useState } from 'react';
+import { loadCartFromFirebase, loadCartStorage } from '../store/slices/CartSlice';
+
 
 
 
 
 
 function Login() {
-    const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
     const [error, setError] = useState('');
-
     const dispatch = useDispatch();
 
     const handleEvent = (e) => {
@@ -31,26 +32,38 @@ function Login() {
 
     const Navigate = useNavigate();
 
-    const onHandlerSignIn = async () => {
+    const onHandlerSignIn = () => {
         const payload = { email, password };
+
         dispatch(signIn(payload))
-            .then((response) => {
-                if (!response.error) {
-                    dispatch(userLoggedIn(response.payload));
-                    console.log('Registro exitoso:', response);
-                    localStorage.setItem('user', JSON.stringify(response.payload));
-                    Navigate('/'); 
+            .then((action) => {
+                if (!action.error) {
+                    // Acción exitosa
+                    dispatch(userLoggedIn(action.payload));
+                    console.log('Registro exitoso:', action.payload);
+                    localStorage.setItem('user', JSON.stringify(action.payload));
+                    dispatch(loadCartFromFirebase())
+                        .then((cartDataAction) => {
+                            dispatch(loadCartStorage(cartDataAction.payload));
+                            Navigate('/');
+                        })
+                        .catch((cartDataError) => {
+                            console.error('Error al cargar la cesta desde Firebase:', cartDataError);
+                            Navigate('/'); // O maneja el error de carga de la cesta de la manera que desees
+                        });
                 } else {
-                    setError('Error: El email o contraseña no son validos!.');
+                    // Acción con error
+                    setError('Error: El email o contraseña no son válidos.');
                 }
-            }) 
+            })
             .catch((error) => {
+                // Error al despachar la acción
                 console.log('error', error);
                 setError('Error de autenticación. Inténtalo de nuevo.');
                 Navigate('/login');
-            })
+            });
+    };
 
-    }
 
 
 

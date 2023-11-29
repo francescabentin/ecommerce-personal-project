@@ -4,17 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     removeItem,
     clearCart,
-    loadLocalStorage,
     updateQuantity, syncCartWithFirebase
 } from "../store/slices/CartSlice";
-import { useEffect } from "react";
+
 
 function Cart() {
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(loadLocalStorage());
-    }, [dispatch]);
 
     const allProducts = useSelector((state) => state.CartSlice.allProducts);
 

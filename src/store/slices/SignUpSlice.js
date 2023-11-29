@@ -3,6 +3,7 @@ import { FIREBASE_API_AUTH_SIGN_UP_URL, FIREBASE_AUTH_BASEURL, FIREBASE_API_AUTH
 import app from '../../firebase/config';
 import { doc, setDoc, getFirestore, getDoc, updateDoc } from 'firebase/firestore';
 
+
 const firestore = getFirestore(app);
 
 async function createUserDocument(localId, userData) {
