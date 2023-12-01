@@ -31,6 +31,7 @@ function Cart() {
 
     const handleUpdateQuantity = (product, newQuantity) => {
         dispatch(updateQuantity({ product, quantity: newQuantity }));
+        dispatch(syncCartWithFirebase(allProducts));
     };
 
     const total = useSelector((state) => state.CartSlice.total.toFixed(2));

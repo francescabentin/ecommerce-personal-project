@@ -77,8 +77,8 @@ export const CartSlice = createSlice({
         clearAndSendCart: (state, action) => {
             state.allProducts = [];
             state.total = 0;
-            localStorage.setItem('cart', JSON.stringify(state.allProducts));
         },
+
         addItem: (state, action) => {
             const productToAdd = action.payload;
             const existingProduct = state.allProducts.find((product) => product.id === productToAdd.id);
@@ -106,13 +106,13 @@ export const CartSlice = createSlice({
             }
 
             state.allProducts = state.allProducts.filter((product) => product.id !== productIdToRemove);
-            localStorage.setItem('cart', JSON.stringify(state.allProducts))
+
         },
 
         clearCart: (state) => {
             state.allProducts = [];
             state.total = 0;
-            localStorage.setItem('cart', JSON.stringify(state.allProducts))
+
         },
         loadCartStorage: (state, action) => {
             const cartData = action.payload;

@@ -4,7 +4,7 @@ import imagen from "../images/imagen1.jpg";
 import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { findProduct } from '../store/slices/ProductsSlice';
-import { addItem } from "../store/slices/CartSlice";
+import { addItem, syncCartWithFirebase } from "../store/slices/CartSlice";
 
 
 
@@ -21,10 +21,11 @@ function ProductDetail() {
 
     }, [dispatch, productIdNumber]);
 
-
+    const allProducts = useSelector((state) => state.productsSlice.allProducts);
 
     const handleAddItem = (product) => {
         dispatch(addItem(product))
+        dispatch(syncCartWithFirebase(allProducts))
 
     }
 

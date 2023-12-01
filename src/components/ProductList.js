@@ -3,7 +3,7 @@ import '../styles/layout/_product.scss'
 import { Input } from 'antd';
 import imagen from "../images/imagen1.jpg";
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from "../store/slices/CartSlice";
+import { addItem, syncCartWithFirebase } from "../store/slices/CartSlice";
 import { Link } from 'react-router-dom';
 import { useState } from "react";
 
@@ -25,6 +25,7 @@ function ProductList() {
 
     const handleAddItem = (product) => {
         dispatch(addItem(product))
+        dispatch(syncCartWithFirebase())
 
     }
 

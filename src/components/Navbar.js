@@ -7,7 +7,7 @@ import {
     CloseMenu,
     toggleActive,
 } from "../store/slices/NavbarSlice";
-import { removeItem, clearCart } from "../store/slices/CartSlice";
+import { removeItem, clearCart, syncCartWithFirebase } from "../store/slices/CartSlice";
 import { userLoggedOut } from "../store/slices/SignUpSlice";
 import menu from "../images/icons8-menú-64.png";
 
@@ -46,12 +46,14 @@ function Navbar() {
 
     const handleRemoveItem = (product) => {
         dispatch(removeItem(product));
+        dispatch(syncCartWithFirebase(allProducts));
     };
 
     const handleClearAll = () => {
         dispatch(clearCart());
         dispatch(CloseMenu());
         dispatch(toggleActive(false));
+        dispatch(syncCartWithFirebase(allProducts));
     };
 
     const totalProducts = allProducts.reduce(
